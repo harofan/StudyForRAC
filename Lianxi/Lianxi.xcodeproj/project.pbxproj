@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		06643C901D5969B000D0837E /* RACSubjectVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 06643C8E1D5969B000D0837E /* RACSubjectVC.m */; };
+		06643C911D5969B000D0837E /* RACSubjectVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 06643C8F1D5969B000D0837E /* RACSubjectVC.xib */; };
+		06643C941D59703000D0837E /* MainVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 06643C931D59703000D0837E /* MainVC.m */; };
 		06C4BE701D5463480068DD84 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 06C4BE6F1D5463480068DD84 /* main.m */; };
 		06C4BE731D5463480068DD84 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 06C4BE721D5463480068DD84 /* AppDelegate.m */; };
 		06C4BE7B1D5463480068DD84 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 06C4BE7A1D5463480068DD84 /* Assets.xcassets */; };
@@ -16,6 +19,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		06643C8D1D5969B000D0837E /* RACSubjectVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RACSubjectVC.h; sourceTree = "<group>"; };
+		06643C8E1D5969B000D0837E /* RACSubjectVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RACSubjectVC.m; sourceTree = "<group>"; };
+		06643C8F1D5969B000D0837E /* RACSubjectVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RACSubjectVC.xib; sourceTree = "<group>"; };
+		06643C921D59703000D0837E /* MainVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainVC.h; sourceTree = "<group>"; };
+		06643C931D59703000D0837E /* MainVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainVC.m; sourceTree = "<group>"; };
 		06C4BE6B1D5463470068DD84 /* Lianxi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lianxi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		06C4BE6F1D5463480068DD84 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		06C4BE711D5463480068DD84 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -43,6 +51,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		06643C8C1D59699600D0837E /* RACSubjectVC */ = {
+			isa = PBXGroup;
+			children = (
+				06643C8D1D5969B000D0837E /* RACSubjectVC.h */,
+				06643C8E1D5969B000D0837E /* RACSubjectVC.m */,
+				06643C8F1D5969B000D0837E /* RACSubjectVC.xib */,
+			);
+			name = RACSubjectVC;
+			sourceTree = "<group>";
+		};
 		06C4BE621D5463470068DD84 = {
 			isa = PBXGroup;
 			children = (
@@ -87,7 +105,10 @@
 		06C4BE8D1D5468890068DD84 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				06643C8C1D59699600D0837E /* RACSubjectVC */,
 				06C4BE8E1D5468C90068DD84 /* RACSignal */,
+				06643C921D59703000D0837E /* MainVC.h */,
+				06643C931D59703000D0837E /* MainVC.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -181,6 +202,7 @@
 			files = (
 				06C4BE7E1D5463480068DD84 /* LaunchScreen.storyboard in Resources */,
 				06C4BE7B1D5463480068DD84 /* Assets.xcassets in Resources */,
+				06643C911D5969B000D0837E /* RACSubjectVC.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -239,8 +261,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				06643C901D5969B000D0837E /* RACSubjectVC.m in Sources */,
 				06C4BE731D5463480068DD84 /* AppDelegate.m in Sources */,
 				06C4BE701D5463480068DD84 /* main.m in Sources */,
+				06643C941D59703000D0837E /* MainVC.m in Sources */,
 				06C4BE911D5468F30068DD84 /* RACSignal1.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

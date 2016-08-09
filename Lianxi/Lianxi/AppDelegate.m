@@ -8,7 +8,7 @@
 
 #import "AppDelegate.h"
 
-#import "RACSignal1.h"
+#import "MainVC.h"
 
 @interface AppDelegate ()
 
@@ -22,22 +22,25 @@
     
     self.window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
     
-    RACSignalVC * signalVC = [[RACSignalVC alloc]init];
+    MainVC * mainVC = [[MainVC alloc]init];
     
-    UITabBarController * tabbarVC = [[UITabBarController alloc]init];
+    UINavigationController * nav = [[UINavigationController alloc]initWithRootViewController:mainVC];
     
-    UINavigationController * nav1 = [[UINavigationController alloc]initWithRootViewController:signalVC];
-    
-    nav1.tabBarItem.title = @"RACSignal";
-    
-    tabbarVC.viewControllers = @[nav1];
-    
-    self.window.rootViewController = tabbarVC;
+    self.window.rootViewController = nav;
     
     [self.window makeKeyAndVisible];
     
     return YES;
 }
+
+//-(UINavigationController*)createNavigationController:(UIViewController*)viewController withNameString:(NSString *)name{
+//    
+//    UINavigationController * nav = [[UINavigationController alloc]initWithRootViewController:viewController];
+//    
+//    nav.tabBarItem.title = name;
+//    
+//    return nav;
+//}
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
