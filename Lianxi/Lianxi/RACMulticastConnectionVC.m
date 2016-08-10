@@ -8,6 +8,7 @@
 
 /*
  可以看到,RACMulticastConnection每次连接一次,信号发送的时候didSubscribeblock都会全部执行一遍,而不仅仅是subscriber发出的东西
+ RACMulticastConnection主要运用的场景就是一个信号发出的时候有多个订阅者的情况
  */
 #import "RACMulticastConnectionVC.h"
 

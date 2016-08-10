@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		060C7B781D5AC1F5009D72E3 /* RACMulticastConnectionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 060C7B771D5AC1F5009D72E3 /* RACMulticastConnectionVC.m */; };
+		060C7B7C1D5ACB39009D72E3 /* RACCommandVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 060C7B7B1D5ACB39009D72E3 /* RACCommandVC.m */; };
 		06643C901D5969B000D0837E /* RACSubjectVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 06643C8E1D5969B000D0837E /* RACSubjectVC.m */; };
 		06643C911D5969B000D0837E /* RACSubjectVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 06643C8F1D5969B000D0837E /* RACSubjectVC.xib */; };
 		06643C941D59703000D0837E /* MainVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 06643C931D59703000D0837E /* MainVC.m */; };
@@ -23,6 +24,8 @@
 /* Begin PBXFileReference section */
 		060C7B761D5AC1F5009D72E3 /* RACMulticastConnectionVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RACMulticastConnectionVC.h; sourceTree = "<group>"; };
 		060C7B771D5AC1F5009D72E3 /* RACMulticastConnectionVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RACMulticastConnectionVC.m; sourceTree = "<group>"; };
+		060C7B7A1D5ACB39009D72E3 /* RACCommandVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RACCommandVC.h; sourceTree = "<group>"; };
+		060C7B7B1D5ACB39009D72E3 /* RACCommandVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RACCommandVC.m; sourceTree = "<group>"; };
 		06643C8D1D5969B000D0837E /* RACSubjectVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RACSubjectVC.h; sourceTree = "<group>"; };
 		06643C8E1D5969B000D0837E /* RACSubjectVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RACSubjectVC.m; sourceTree = "<group>"; };
 		06643C8F1D5969B000D0837E /* RACSubjectVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RACSubjectVC.xib; sourceTree = "<group>"; };
@@ -64,6 +67,15 @@
 				060C7B771D5AC1F5009D72E3 /* RACMulticastConnectionVC.m */,
 			);
 			name = RACMulticastConnection;
+			sourceTree = "<group>";
+		};
+		060C7B791D5ACB1C009D72E3 /* RACCommand */ = {
+			isa = PBXGroup;
+			children = (
+				060C7B7A1D5ACB39009D72E3 /* RACCommandVC.h */,
+				060C7B7B1D5ACB39009D72E3 /* RACCommandVC.m */,
+			);
+			name = RACCommand;
 			sourceTree = "<group>";
 		};
 		06643C8C1D59699600D0837E /* RACSubjectVC */ = {
@@ -129,6 +141,7 @@
 		06C4BE8D1D5468890068DD84 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				060C7B791D5ACB1C009D72E3 /* RACCommand */,
 				060C7B751D5AC1E1009D72E3 /* RACMulticastConnection */,
 				06643C951D59A77200D0837E /* RACSequence */,
 				06643C8C1D59699600D0837E /* RACSubjectVC */,
@@ -294,6 +307,7 @@
 				06643C941D59703000D0837E /* MainVC.m in Sources */,
 				060C7B781D5AC1F5009D72E3 /* RACMulticastConnectionVC.m in Sources */,
 				06C4BE911D5468F30068DD84 /* RACSignal1.m in Sources */,
+				060C7B7C1D5ACB39009D72E3 /* RACCommandVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
