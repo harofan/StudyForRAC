@@ -47,7 +47,7 @@
 -(void)loadNsarray:(NSArray*)array{
     
     [array.rac_sequence.signal subscribeNext:^(id x) {
-        NSLog(@"%@",x);
+        NSLog(@"%@",[x class]);
     }error:^(NSError *error) {
         NSLog(@"%@",error);
     }completed:^{

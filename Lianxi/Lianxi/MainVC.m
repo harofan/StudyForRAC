@@ -14,6 +14,8 @@
 
 #import "RACSequenceVC.h"
 
+#import "RACMulticastConnectionVC.h"
+
 @interface MainVC ()<UITableViewDataSource,UITableViewDelegate>
 
 @end
@@ -83,6 +85,10 @@
             cell.textLabel.text = @"RACSequence";
             break;
             
+        case 3:
+            cell.textLabel.text = @"RACMulticastConnection";
+            break;
+            
         default:
             break;
     }
@@ -120,6 +126,19 @@
             
             break;
         }
+            
+        case 3:
+        {
+            RACMulticastConnectionVC * vc = [[RACMulticastConnectionVC alloc]init];
+            
+            [self.navigationController pushViewController:vc animated:YES];
+            
+            break;
+        }
+            
+            
+            
+            
         default:
             break;
     }
