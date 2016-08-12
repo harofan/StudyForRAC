@@ -16,16 +16,19 @@ My email address is fanyang_32012@outlook.com.
 
 ### 我们为什么要学习RAC?
 
-- RAC是github团队开发的一套超重量级开源框架
+RAC是github团队开发的一套超重量级开源框架
 
-- 目的在于事件的监听,RAC几乎接管了Apple所有的事件机制,主要有以下四大点:
+目的在于事件的监听,RAC几乎接管了Apple所有的事件机制,主要有以下四大点:
 
 * addTarget
+
 * 代理
+
 * 通知
+
 * KVO
 
-- block不能列入其中的原因很简单.block是提前准备好的代码,传递给接收方,至于什么时候执行接收方并不知道
+block不能列入其中的原因很简单.block是提前准备好的代码,传递给接收方,至于什么时候执行接收方并不知道
 
 ### RAC学习起来的特点
 
@@ -35,7 +38,7 @@ My email address is fanyang_32012@outlook.com.
 
 ### RAC框架如何pod导入项目
 
-- 首先在podfile里把use_frameworks!的注释取消掉,即把#删掉即可
+- 首先在podfile里把use_frameworks!的注释取消掉,即把#删掉即可,因为RAC框架是支持Swift的
 
 - 再然后可以添加上 pod 'ReactiveCocoa', '~> 4.1.0'
 
@@ -44,6 +47,16 @@ My email address is fanyang_32012@outlook.com.
 - 使用时只要将 'ReactiveCocoa.h' 'NSObject+RACKVOWrapper.h' 'RACReturnSignal.h' 这三个文件导入就可以了
 
 - 注意:若出现大量报错的话,请将Xcode升级至7.3以上
+
+### RAC框架的版本问题
+
+- 4.0版本支持Swift2.0
+
+- 3.0版本支持Swift1.2
+
+- 2.5版本不支持Swift
+
+若导入框架后出现报错注意排查
 
 #### RACSignal
 
