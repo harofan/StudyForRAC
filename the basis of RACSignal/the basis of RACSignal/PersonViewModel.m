@@ -31,9 +31,9 @@
             
         } else {
             
-            //若没有错误发送正确信息
+            //创建信息(只需要知道是给_dataArray赋值就可以)
             [self creatInfo];
-            
+            //若没有错误发送正确信息,并将数组送出
             [subscriber sendNext:_dataArray];
             
         }
