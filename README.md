@@ -8,11 +8,19 @@ My email address is fanyang_32012@outlook.com.
 
 ### RAC是一个非常强大的框架我们将会从以下方面去介绍它
 
+[推荐在学习前先看下这个项目,比较简单也很好理解](https://github.com/SkyHarute/Functional-Programming)
+
 * RACSignal
 * RACSubject
 * RACSequence
 * RACMulticastConnection
 * RACCommand
+
+### 项目文件夹介绍
+
+Lianxi 文件夹大致讲述了RAC框架一些简单的使用例子
+
+the basis of RACSignal 文件夹主要讲述了RACSignal这个类该如何去使用
 
 ### 我们为什么要学习RAC?
 
@@ -60,34 +68,62 @@ block不能列入其中的原因很简单.block是提前准备好的代码,传�
 
 #### RACSignal
 
-- 我们首先要创建一个信号
+- 首先在viewModel内创建信号,外界在调用读取信息方法时,向外界返回一个信号
 
-        RACSignal * signal = [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+        -(RACSignal *)loadInfo{
 
-            [subscriber sendNext:@"信号内容/signal content"];
-            //这里采用的是链式编程
-            return [RACDisposable disposableWithBlock:^{
 
-            NSLog(@"此时取消订阅");
+            return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+
+                BOOL isError = NO;
+
+                if (isError) {
+
+                    //发送错误信息
+                    [subscriber sendError:[NSError errorWithDomain:@"github.com/SkyHarute" code:2333 userInfo:@{@"errorMessage":@"异常错误"}]];
+
+                } else {
+
+                    //创建信息(只需要知道是给_dataArray赋值就可以)
+                    [self creatInfo];
+
+                    //若没有错误发送正确信息,并将数组送出
+                    [subscriber sendNext:_dataArray];
+
+                }
+
+                //正确信息发送完毕后发送完成信号,若信息为错误信息则不发送完成信号
+                [subscriber sendCompleted];
+
+                return nil;
 
             }];
 
-        }];
-        
-- 下来我们要订阅这个信号
+        }
 
-        RACDisposable * disposable = [self.signal subscribeNext:^(id x) {
-2544444
+- 在控制器调用该方法读取信息获取到当前信号并订阅
+
+        //这是signal对象方法中能把三种情况全部列举出来的对象方法,根据需求决定,一般使用最简单的就好
+        [[viewModel loadInfo] subscribeNext:^(id x) {
+
+        //接收到正常发送信号,并打印信号传过来的信息
         NSLog(@"%@",x);
 
+        } error:^(NSError *error) {
+    
+        //接收到错误信号,并打印出错误信息
+        NSLog(@"%@",error);
+
+        } completed:^{
+
+        //接收到完成信号,并打印出完成信息,若为错误信号则不打印
+        NSLog(@"完成");
+
         }];
 
-- 最后不要忘记取消订阅
+- 信号的三种对象方法sendNext,sendError,sendCompleted分别对应订阅者的next,error,completed三种情况,我们只要监听订阅者的三个代码块,并写上相应的代码,就可以实现在不同的代码块获得自己想要的东西.
 
-        [disposable dispose];
-
-和通知很像,有通知的发出者和接收者,最后也一样要取消订阅,值得一提的是,使用RAC发送通知最后不用取消通知
-
+![image](https://github.com/SkyHarute/StudyForRAC/blob/master/imageFile/1.png)
 
 #### RACSubject
 
