@@ -18,6 +18,10 @@
 
 @property (weak, nonatomic) IBOutlet UITextField *tf_name;
 
+@property (weak, nonatomic) IBOutlet UILabel *lb_name;
+
+@property (weak, nonatomic) IBOutlet UILabel *lb_age;
+
 @property (strong, nonatomic)NSArray * dataArray;
 @end
 
@@ -31,7 +35,9 @@
     [self getInfo];
     
     //处理事件
-    [self handlingEvents];
+//    [self handlingEvents];
+    
+    [self twoWayBinding];
 }
 
 #pragma mark - 获取信息 -
@@ -95,10 +101,42 @@
     
     //根据textfield内容决定按钮是否可以点击
     // reduce 中，可以通过接收的参数进行计算，并且返回需要的数值！
-//    [[RACSignal combineLatest:@[self.tf_name.rac_textSignal,self.tf_age.rac_textSignal]] reduce:^id (NSString * name , NSString * age){
-//        
-//        return @(name.length>0&&age.length>0);
-//    }]
+    [[RACSignal combineLatest:@[self.tf_name.rac_textSignal,self.tf_age.rac_textSignal] reduce:^id(NSString * name , NSString * age){
+        
+        return @(name.length>0&&age.length>0);
+        
+    }] subscribeNext:^(id x) {
+        
+        self.btn_event.enabled = [x boolValue];
+        
+    }];
+    
+}
+
+#pragma mark - 双向绑定 -
+-(void)twoWayBinding{
+    
+    //一般双向绑定是指UI控件和模型互相绑定的,一般是在在改变一个值的情况下另外一个对象也会改变,类似KVO;
+    //这里为了更好的体现出效果所以采用了textfield绑定到模型,模型绑定到label的做法,比较好理解
+    
+    //UI绑定模型
+    PersonModel * model = [[PersonModel alloc]init];
+    
+    model = self.dataArray.firstObject;
+    
+    RAC(self.lb_name,text)=RACObserve(model, name);
+    
+#warning 这里不能使用基本数据类型,RAC中传递的都是id类型,使用基本类型会崩溃
+    RAC(self.lb_age,text)=[RACObserve(model, age) map:^id(id value) {
+        return [value description];
+    }];
+    //模型到UI
+    [[RACSignal combineLatest:@[self.tf_name.rac_textSignal,self.tf_age.rac_textSignal]] subscribeNext:^(RACTuple * x) {
+        
+        model.name = x.first;
+        model.age = [x.second intValue];
+    }];
+     
     
 }
 
