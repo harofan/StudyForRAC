@@ -27,6 +27,7 @@
 
 @implementation ViewController
 
+#pragma mark - 生命周期 -
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
@@ -35,9 +36,16 @@
     [self getInfo];
     
     //处理事件
-//    [self handlingEvents];
+    [self handlingEvents];
     
-    [self twoWayBinding];
+//    [self twoWayBinding];
+}
+#warning RAC在使用的时候由于系统提供的信号是始终存在的,所以在block中使用属性或者成员变量几乎都会涉及到一个循环引用的问题,有两种方法可以解决,使用weakself解决或者RAC提供的weak-strong dance
+//在 block 的外部使用 @weakify(self)
+//在 block 的内部使用 @strongify(self)
+-(void)dealloc{
+  
+    NSLog(@"已销毁");
 }
 
 #pragma mark - 获取信息 -
@@ -70,10 +78,12 @@
 
 #pragma mark - 处理事件 -
 -(void)handlingEvents{
+    @weakify(self);
     
     //按钮点击
     [[self.btn_event rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
         
+        @strongify(self);
         NSLog(@"%@",self.dataArray.firstObject);
         
     }];
@@ -107,6 +117,8 @@
         
     }] subscribeNext:^(id x) {
         
+        @strongify(self);
+        
         self.btn_event.enabled = [x boolValue];
         
     }];
@@ -136,8 +148,9 @@
         model.name = x.first;
         model.age = [x.second intValue];
     }];
-     
     
 }
+
+
 
 @end
