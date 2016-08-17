@@ -70,7 +70,7 @@ block不能列入其中的原因很简单.block是提前准备好的代码,传�
 
 若导入框架后出现报错注意排查
 
-#### RACSignal
+### RACSignal
 
 - 首先在viewModel内创建信号,外界在调用读取信息方法时,向外界返回一个信号
 
@@ -129,7 +129,7 @@ block不能列入其中的原因很简单.block是提前准备好的代码,传�
 
 - RAC在使用的时候由于系统提供的信号是始终存在的,所以在block中使用属性或者成员变量几乎都会涉及到一个循环引用的问题,有两种方法可以解决,使用weakself解决或者RAC提供的weak-strong dance.用法也比较简单:在 block 的外部使用 @weakify(self),在 block 的内部使用 @strongify(self),具体的方法会在demo或下文中看到
 
-- 列举一些RAC常用的事件处理,这里教大家一个技巧,通过查看RAC框架中UI控件的分类便可以得知
+#### 列举一些RAC常用的事件处理,这里教大家一个技巧,通过查看RAC框架中UI控件的分类便可以得知
 
 * 按钮点击
 
@@ -183,10 +183,37 @@ block不能列入其中的原因很简单.block是提前准备好的代码,传�
 
         }];
 
+#### 双向绑定
+
+一般双向绑定是指UI控件和模型互相绑定的,一般是在在改变一个值的情况下另外一个对象也会改变,类似KVO,但KVO写的时候很多观察属性写在一个方法里对代码的可阅读性并不是很好
+
+这里为了更好的体现出效果所以采用了textfield绑定到模型,模型绑定到label的做法,比较好理解,这样在textfiled输入文字便能够实时改变模型值,而模型值一旦改变,label的text内容也会随之改变.
+
+* UI绑定模型
+
+        PersonModel * model = [[PersonModel alloc]init];
+
+        model = self.dataArray.firstObject;
+
+        RAC(self.lb_name,text)=RACObserve(model, name);
+
+        //这里不能使用基本数据类型,RAC中传递的都是id类型,使用基本类型会崩溃,所以使用map方法对返回值进行了更替
+
+        RAC(self.lb_age,text)=[RACObserve(model, age) map:^id(id value) {
+
+            return [value description];
+        }];
+
+* 模型到UI
+        [[RACSignal combineLatest:@[self.tf_name.rac_textSignal,self.tf_age.rac_textSignal]] subscribeNext:^(RACTuple * x) {
+
+        model.name = x.first;
+        model.age = [x.second intValue];
+        }];
 
 ![image](https://github.com/SkyHarute/StudyForRAC/blob/master/imageFile/1.png)
 
-#### RACSubject
+### RACSubject
 
 
 
