@@ -127,6 +127,63 @@ block不能列入其中的原因很简单.block是提前准备好的代码,传�
 
 - 信号的三种对象方法sendNext,sendError,sendCompleted分别对应订阅者的next,error,completed三种情况,我们只要监听订阅者的三个代码块,并写上相应的代码,就可以实现在不同的代码块获得自己想要的东西.
 
+- RAC在使用的时候由于系统提供的信号是始终存在的,所以在block中使用属性或者成员变量几乎都会涉及到一个循环引用的问题,有两种方法可以解决,使用weakself解决或者RAC提供的weak-strong dance.用法也比较简单:在 block 的外部使用 @weakify(self),在 block 的内部使用 @strongify(self),具体的方法会在demo或下文中看到
+
+- 列举一些RAC常用的事件处理,这里教大家一个技巧,通过查看RAC框架中UI控件的分类便可以得知
+
+* 按钮点击
+
+        @weakify(self);
+
+        [[self.btn_event rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
+
+            @strongify(self);
+
+            NSLog(@"%@",self.dataArray.firstObject);
+
+        }];
+
+* textField输入内容的实时监听
+
+        [[self.tf_name rac_textSignal] subscribeNext:^(id x) {
+    
+        NSLog(@"%@",x);
+        
+        }];
+
+* 组合信号的使用,我们想将两个信号整合成一个信号的话这样做就可以了,这样就避免了同时订阅两个信号的苦恼
+
+        //信号组合获取,注意将id类型改为RACTuple
+
+        [[RACSignal combineLatest:@[self.tf_name.rac_textSignal,self.tf_age.rac_textSignal]] subscribeNext:^(RACTuple *x) {
+
+            NSString * name = x.first;
+
+            NSString * age = x.second;
+
+            NSLog(@"name:%@,age:%@",name,age);
+
+        }];
+
+* 信号组合时reduce的使用
+
+        //根据textfield内容决定按钮是否可以点击
+
+        // reduce 中，可以通过接收的参数进行计算，并且返回需要的数值！
+
+        [[RACSignal combineLatest:@[self.tf_name.rac_textSignal,self.tf_age.rac_textSignal] reduce:^id(NSString * name , NSString * age){
+
+            return @(name.length>0&&age.length>0);
+
+        }] subscribeNext:^(id x) {
+
+            @strongify(self);
+
+            self.btn_event.enabled = [x boolValue];
+
+        }];
+
+
 ![image](https://github.com/SkyHarute/StudyForRAC/blob/master/imageFile/1.png)
 
 #### RACSubject
