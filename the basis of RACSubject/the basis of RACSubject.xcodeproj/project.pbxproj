@@ -15,6 +15,10 @@
 		0666D72F1D6592CD00D06024 /* PersonViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0666D72E1D6592CD00D06024 /* PersonViewModel.m */; };
 		0666D7321D65997300D06024 /* AppleModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0666D7311D65997300D06024 /* AppleModel.m */; };
 		0666D7351D65998C00D06024 /* AppleViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0666D7341D65998C00D06024 /* AppleViewModel.m */; };
+		0666D73A1D65B23100D06024 /* RACSubjectDelegateVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0666D7381D65B23100D06024 /* RACSubjectDelegateVC.m */; };
+		0666D73B1D65B23100D06024 /* RACSubjectDelegateVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0666D7391D65B23100D06024 /* RACSubjectDelegateVC.xib */; };
+		0666D73F1D65B39D00D06024 /* DelegateSecondVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0666D73D1D65B39D00D06024 /* DelegateSecondVC.m */; };
+		0666D7401D65B39D00D06024 /* DelegateSecondVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0666D73E1D65B39D00D06024 /* DelegateSecondVC.xib */; };
 		066A3FC51D654DDA00202338 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 066A3FC41D654DDA00202338 /* main.m */; };
 		066A3FC81D654DDA00202338 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 066A3FC71D654DDA00202338 /* AppDelegate.m */; };
 		066A3FCB1D654DDA00202338 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 066A3FCA1D654DDA00202338 /* ViewController.m */; };
@@ -39,6 +43,12 @@
 		0666D7311D65997300D06024 /* AppleModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppleModel.m; sourceTree = "<group>"; };
 		0666D7331D65998C00D06024 /* AppleViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppleViewModel.h; sourceTree = "<group>"; };
 		0666D7341D65998C00D06024 /* AppleViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppleViewModel.m; sourceTree = "<group>"; };
+		0666D7371D65B23100D06024 /* RACSubjectDelegateVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RACSubjectDelegateVC.h; sourceTree = "<group>"; };
+		0666D7381D65B23100D06024 /* RACSubjectDelegateVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RACSubjectDelegateVC.m; sourceTree = "<group>"; };
+		0666D7391D65B23100D06024 /* RACSubjectDelegateVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RACSubjectDelegateVC.xib; sourceTree = "<group>"; };
+		0666D73C1D65B39D00D06024 /* DelegateSecondVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DelegateSecondVC.h; sourceTree = "<group>"; };
+		0666D73D1D65B39D00D06024 /* DelegateSecondVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DelegateSecondVC.m; sourceTree = "<group>"; };
+		0666D73E1D65B39D00D06024 /* DelegateSecondVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DelegateSecondVC.xib; sourceTree = "<group>"; };
 		066A3FC01D654DDA00202338 /* the basis of RACSubject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "the basis of RACSubject.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		066A3FC41D654DDA00202338 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		066A3FC61D654DDA00202338 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -142,6 +152,19 @@
 			name = ViewModel;
 			sourceTree = "<group>";
 		};
+		0666D7361D65B20500D06024 /* RACSubjectDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				0666D7371D65B23100D06024 /* RACSubjectDelegateVC.h */,
+				0666D7381D65B23100D06024 /* RACSubjectDelegateVC.m */,
+				0666D7391D65B23100D06024 /* RACSubjectDelegateVC.xib */,
+				0666D73C1D65B39D00D06024 /* DelegateSecondVC.h */,
+				0666D73D1D65B39D00D06024 /* DelegateSecondVC.m */,
+				0666D73E1D65B39D00D06024 /* DelegateSecondVC.xib */,
+			);
+			name = RACSubjectDelegate;
+			sourceTree = "<group>";
+		};
 		066A3FB71D654DDA00202338 = {
 			isa = PBXGroup;
 			children = (
@@ -163,6 +186,7 @@
 		066A3FC21D654DDA00202338 /* the basis of RACSubject */ = {
 			isa = PBXGroup;
 			children = (
+				0666D7361D65B20500D06024 /* RACSubjectDelegate */,
 				0661AD871D65565C00855977 /* RACReplaySubject */,
 				0661AD861D65564E00855977 /* RACSubject */,
 				066A3FC61D654DDA00202338 /* AppDelegate.h */,
@@ -265,8 +289,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				0661AD921D65572300855977 /* RACSubjectVC.xib in Resources */,
+				0666D7401D65B39D00D06024 /* DelegateSecondVC.xib in Resources */,
 				066A3FD31D654DDA00202338 /* LaunchScreen.storyboard in Resources */,
 				066A3FD01D654DDA00202338 /* Assets.xcassets in Resources */,
+				0666D73B1D65B23100D06024 /* RACSubjectDelegateVC.xib in Resources */,
 				066A3FCE1D654DDA00202338 /* Main.storyboard in Resources */,
 				0661AD9C1D65580D00855977 /* RACReplaySubjectVC.xib in Resources */,
 			);
@@ -328,12 +354,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				0666D72C1D6592BF00D06024 /* PersonModel.m in Sources */,
+				0666D73F1D65B39D00D06024 /* DelegateSecondVC.m in Sources */,
 				0666D7351D65998C00D06024 /* AppleViewModel.m in Sources */,
 				0661AD9B1D65580D00855977 /* RACReplaySubjectVC.m in Sources */,
 				0666D7321D65997300D06024 /* AppleModel.m in Sources */,
 				0666D72F1D6592CD00D06024 /* PersonViewModel.m in Sources */,
 				0661AD911D65572300855977 /* RACSubjectVC.m in Sources */,
 				066A3FCB1D654DDA00202338 /* ViewController.m in Sources */,
+				0666D73A1D65B23100D06024 /* RACSubjectDelegateVC.m in Sources */,
 				066A3FC81D654DDA00202338 /* AppDelegate.m in Sources */,
 				066A3FC51D654DDA00202338 /* main.m in Sources */,
 			);

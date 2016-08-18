@@ -12,6 +12,8 @@
 
 #import "RACReplaySubjectVC.h"
 
+#import "RACSubjectDelegateVC.h"
+
 @interface ViewController ()<UITableViewDataSource,UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -52,7 +54,7 @@ static NSString * identifier = @"cell";
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
-    return 2;
+    return 3;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -66,6 +68,10 @@ static NSString * identifier = @"cell";
             
         case 1:
             cell.textLabel.text = @"RACReplaySubject";
+            break;
+            
+        case 2:
+            cell.textLabel.text = @"RACSubject代替代理";
             break;
             
         default:
@@ -105,10 +111,22 @@ static NSString * identifier = @"cell";
             RACReplaySubjectVC * vc = [[RACReplaySubjectVC alloc]init];
             
             [self.navigationController pushViewController:vc animated:YES];
-        
+            
             break;
         }
+            
+        case 2:
+        {
+            
+            RACSubjectDelegateVC * vc = [[RACSubjectDelegateVC alloc] init];
+            
+            [self.navigationController pushViewController:vc animated:YES];
+            
+            break;
+        }
+            
         default:
+            
             break;
     }
 }
