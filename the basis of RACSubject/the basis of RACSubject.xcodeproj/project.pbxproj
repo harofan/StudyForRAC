@@ -13,6 +13,8 @@
 		0661AD9C1D65580D00855977 /* RACReplaySubjectVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0661AD9A1D65580D00855977 /* RACReplaySubjectVC.xib */; };
 		0666D72C1D6592BF00D06024 /* PersonModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0666D72B1D6592BF00D06024 /* PersonModel.m */; };
 		0666D72F1D6592CD00D06024 /* PersonViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0666D72E1D6592CD00D06024 /* PersonViewModel.m */; };
+		0666D7321D65997300D06024 /* AppleModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0666D7311D65997300D06024 /* AppleModel.m */; };
+		0666D7351D65998C00D06024 /* AppleViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0666D7341D65998C00D06024 /* AppleViewModel.m */; };
 		066A3FC51D654DDA00202338 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 066A3FC41D654DDA00202338 /* main.m */; };
 		066A3FC81D654DDA00202338 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 066A3FC71D654DDA00202338 /* AppDelegate.m */; };
 		066A3FCB1D654DDA00202338 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 066A3FCA1D654DDA00202338 /* ViewController.m */; };
@@ -33,6 +35,10 @@
 		0666D72B1D6592BF00D06024 /* PersonModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonModel.m; sourceTree = "<group>"; };
 		0666D72D1D6592CD00D06024 /* PersonViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonViewModel.h; sourceTree = "<group>"; };
 		0666D72E1D6592CD00D06024 /* PersonViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonViewModel.m; sourceTree = "<group>"; };
+		0666D7301D65997300D06024 /* AppleModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppleModel.h; sourceTree = "<group>"; };
+		0666D7311D65997300D06024 /* AppleModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppleModel.m; sourceTree = "<group>"; };
+		0666D7331D65998C00D06024 /* AppleViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppleViewModel.h; sourceTree = "<group>"; };
+		0666D7341D65998C00D06024 /* AppleViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppleViewModel.m; sourceTree = "<group>"; };
 		066A3FC01D654DDA00202338 /* the basis of RACSubject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "the basis of RACSubject.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		066A3FC41D654DDA00202338 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		066A3FC61D654DDA00202338 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -83,6 +89,8 @@
 		0661AD881D6556A200855977 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				0666D7301D65997300D06024 /* AppleModel.h */,
+				0666D7311D65997300D06024 /* AppleModel.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -90,6 +98,8 @@
 		0661AD891D6556AE00855977 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				0666D7331D65998C00D06024 /* AppleViewModel.h */,
+				0666D7341D65998C00D06024 /* AppleViewModel.m */,
 			);
 			name = ViewModel;
 			sourceTree = "<group>";
@@ -318,7 +328,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				0666D72C1D6592BF00D06024 /* PersonModel.m in Sources */,
+				0666D7351D65998C00D06024 /* AppleViewModel.m in Sources */,
 				0661AD9B1D65580D00855977 /* RACReplaySubjectVC.m in Sources */,
+				0666D7321D65997300D06024 /* AppleModel.m in Sources */,
 				0666D72F1D6592CD00D06024 /* PersonViewModel.m in Sources */,
 				0661AD911D65572300855977 /* RACSubjectVC.m in Sources */,
 				066A3FCB1D654DDA00202338 /* ViewController.m in Sources */,
