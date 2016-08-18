@@ -11,6 +11,8 @@
 		0661AD921D65572300855977 /* RACSubjectVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0661AD901D65572300855977 /* RACSubjectVC.xib */; };
 		0661AD9B1D65580D00855977 /* RACReplaySubjectVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0661AD991D65580D00855977 /* RACReplaySubjectVC.m */; };
 		0661AD9C1D65580D00855977 /* RACReplaySubjectVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0661AD9A1D65580D00855977 /* RACReplaySubjectVC.xib */; };
+		0666D72C1D6592BF00D06024 /* PersonModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0666D72B1D6592BF00D06024 /* PersonModel.m */; };
+		0666D72F1D6592CD00D06024 /* PersonViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0666D72E1D6592CD00D06024 /* PersonViewModel.m */; };
 		066A3FC51D654DDA00202338 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 066A3FC41D654DDA00202338 /* main.m */; };
 		066A3FC81D654DDA00202338 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 066A3FC71D654DDA00202338 /* AppDelegate.m */; };
 		066A3FCB1D654DDA00202338 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 066A3FCA1D654DDA00202338 /* ViewController.m */; };
@@ -27,6 +29,10 @@
 		0661AD981D65580D00855977 /* RACReplaySubjectVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RACReplaySubjectVC.h; sourceTree = "<group>"; };
 		0661AD991D65580D00855977 /* RACReplaySubjectVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RACReplaySubjectVC.m; sourceTree = "<group>"; };
 		0661AD9A1D65580D00855977 /* RACReplaySubjectVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RACReplaySubjectVC.xib; sourceTree = "<group>"; };
+		0666D72A1D6592BF00D06024 /* PersonModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonModel.h; sourceTree = "<group>"; };
+		0666D72B1D6592BF00D06024 /* PersonModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonModel.m; sourceTree = "<group>"; };
+		0666D72D1D6592CD00D06024 /* PersonViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonViewModel.h; sourceTree = "<group>"; };
+		0666D72E1D6592CD00D06024 /* PersonViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonViewModel.m; sourceTree = "<group>"; };
 		066A3FC01D654DDA00202338 /* the basis of RACSubject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "the basis of RACSubject.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		066A3FC41D654DDA00202338 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		066A3FC61D654DDA00202338 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -101,6 +107,9 @@
 		0661AD8B1D6556CA00855977 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				0661AD8E1D65572300855977 /* RACSubjectVC.h */,
+				0661AD8F1D65572300855977 /* RACSubjectVC.m */,
+				0661AD901D65572300855977 /* RACSubjectVC.xib */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -108,6 +117,8 @@
 		0661AD8C1D6556DF00855977 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				0666D72A1D6592BF00D06024 /* PersonModel.h */,
+				0666D72B1D6592BF00D06024 /* PersonModel.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -115,9 +126,8 @@
 		0661AD8D1D6556EA00855977 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				0661AD8E1D65572300855977 /* RACSubjectVC.h */,
-				0661AD8F1D65572300855977 /* RACSubjectVC.m */,
-				0661AD901D65572300855977 /* RACSubjectVC.xib */,
+				0666D72D1D6592CD00D06024 /* PersonViewModel.h */,
+				0666D72E1D6592CD00D06024 /* PersonViewModel.m */,
 			);
 			name = ViewModel;
 			sourceTree = "<group>";
@@ -307,7 +317,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0666D72C1D6592BF00D06024 /* PersonModel.m in Sources */,
 				0661AD9B1D65580D00855977 /* RACReplaySubjectVC.m in Sources */,
+				0666D72F1D6592CD00D06024 /* PersonViewModel.m in Sources */,
 				0661AD911D65572300855977 /* RACSubjectVC.m in Sources */,
 				066A3FCB1D654DDA00202338 /* ViewController.m in Sources */,
 				066A3FC81D654DDA00202338 /* AppDelegate.m in Sources */,
