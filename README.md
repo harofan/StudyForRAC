@@ -266,6 +266,76 @@ RACSubject与RACSignal在发送信号这件事上是基本相同的,用法也是
 
         [self.subject sendCompleted];
 
+#### RACReplaySubject的使用
+
+与RACSubject不同,RACReplaySubject在使用时不用过多的考虑订阅与信号发送先后的问题
+
+- 控制器端
+
+        AppleViewModel * viewModel = [[AppleViewModel alloc]init];
+        //这里可以不用考虑是先订阅还是先发送信号的问题
+        [[viewModel loadInfo] subscribeNext:^(id x) {
+
+            NSLog(@"%@",x);
+
+        } error:^(NSError *error) {
+
+            NSLog(@"%@",error);
+
+        } completed:^{
+
+            NSLog(@"完成");
+
+        }];
+
+- viewModel端与RACSubject相似
+
+#### RACSubject作为代理
+
+RACSubject作为代理有些局限性,代理方法不能有返回值
+
+- 系统的代理,这里举例一个UIAlertView的代理
+
+        [[self rac_signalForSelector:@selector(alertView:clickedButtonAtIndex:) fromProtocol:@protocol(UIAlertViewDelegate)] subscribeNext:^(RACTuple * x) {
+
+            NSLog(@"%@",x);
+
+        }];
+        
+- 自己写的一个代理,在push之前的控制器执行这段代码
+
+        DelegateSecondVC * vc = [[DelegateSecondVC alloc] init];
+
+        RACSubject * subject = [RACSubject subject];
+
+        //将即将跳转的控制器对其RACSubject属性进行赋值,如果跳转页要让他的代理来做什么只需要发送响应的信号就可以了
+        vc.delagetaSubject = subject;
+
+        //这里有个原则,那就是还是要先订阅在发送信号
+        [subject subscribeNext:^(id x) {
+
+            NSLog(@"%@",x);
+
+        } error:^(NSError *error) {
+
+            NSLog(@"%@",error);
+
+        } completed:^{
+
+            NSLog(@"完成");
+
+        }];
+
+        [self.navigationController pushViewController:vc animated:YES];
+
+- 在push的第二个页面执行这段代码,就可以了,self.delagetaSubject是暴露在头文件的一个属性,需要第一个控制器来提供,详情请参考demo
+
+        if (self.delagetaSubject) {
+
+            [self.delagetaSubject sendNext:@"haha"];
+
+            [self.delagetaSubject sendCompleted];
+        }
 
 - 未完待续
 
