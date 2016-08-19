@@ -205,17 +205,66 @@ block不能列入其中的原因很简单.block是提前准备好的代码,传�
         }];
 
 * 模型到UI
+
         [[RACSignal combineLatest:@[self.tf_name.rac_textSignal,self.tf_age.rac_textSignal]] subscribeNext:^(RACTuple * x) {
 
         model.name = x.first;
+
         model.age = [x.second intValue];
+
         }];
 
 ![image](https://github.com/SkyHarute/StudyForRAC/blob/master/imageFile/1.png)
 
 ### RACSubject
 
+RACSubject与RACSignal在发送信号这件事上是基本相同的,用法也是差不多相同的,不同点是RACSubject需要先订阅,然后再发送信号,控制器才能够处理信号,RACReplaySubject则不用考虑订阅信号的先后顺序,所以比较推荐使用这个.另外RACSubject也可以用作代理代理,当然这也是有限制的,只能替代那些没有返回值的代理.
 
+#### RACSubject的使用
+
+与RACSignal类似,我们先要订阅信号,在发送信号,否则会导致信号无法执行,读取信号的时候可以通过懒加载进行读取
+
+- 控制器接收信号部分
+
+        PersonViewModel * viewModel = [[PersonViewModel alloc]init];
+
+        //这是错误做法,先发送信号再订阅信号的话对于RACSubject来说的话是不可以的,RACReplaySubject可以先发送信号再去订阅
+        //    [viewModel loadInfo];
+
+        //先获取到RACSubject,再订阅他,和RACSignal基本相同的方式
+        [[viewModel getSubject] subscribeNext:^(id x) {
+
+            NSLog(@"%@",x);
+
+        } error:^(NSError *error) {
+
+            NSLog(@"%@",error);
+
+        } completed:^{
+
+            NSLog(@"完成");
+
+        }];
+
+        //发送信号
+        [viewModel loadInfo];
+
+- viewModel发送信号部分
+
+        BOOL isError = NO;
+
+        if (isError) {
+
+            [self.subject sendError:[NSError errorWithDomain:@"github.com/SkyHarute" code:2333 userInfo:@{@"errorMessage":@"异常错误"}]];
+
+        }else{
+
+            [self creatInfo];
+
+            [self.subject sendNext:_dataArray];
+        }
+
+        [self.subject sendCompleted];
 
 
 - 未完待续
