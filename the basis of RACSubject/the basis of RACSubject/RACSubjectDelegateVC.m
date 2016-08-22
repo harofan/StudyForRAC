@@ -24,8 +24,6 @@
     
     self.navigationItem.title = @"RACSubjectDelegate";
     
-    
-    
 }
 //跳转到第二个页面
 - (IBAction)didClickNextBtn:(UIButton *)sender {

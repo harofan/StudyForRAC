@@ -78,7 +78,7 @@
         }];
     }];
     
-    [command execute:@2];
+    [command execute:@3];
     
 
 }
