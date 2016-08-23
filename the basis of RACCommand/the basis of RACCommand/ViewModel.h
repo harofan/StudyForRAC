@@ -12,8 +12,8 @@
 
 @interface ViewModel : NSObject
 
+//这里需要对command进行强引用,否则无法执行
 @property(nonatomic,strong)RACCommand * command;
 
--(void)loadInfo;
 
 @end
