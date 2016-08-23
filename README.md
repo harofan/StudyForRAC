@@ -22,6 +22,8 @@ Lianxi 文件夹大致讲述了RAC框架一些简单的使用例子
 
 the basis of RACSignal 文件夹主要讲述了RACSignal这个类该如何去使用
 
+the basis of RACSubject 文件夹主要讲述了RACSubject与RACSignal的小区别,以及RACSubject如何作为代理去使用 
+
 ### 我们为什么要学习RAC?
 
 RAC是github团队开发的一套超重量级开源框架
@@ -197,7 +199,7 @@ block不能列入其中的原因很简单.block是提前准备好的代码,传�
 
         RAC(self.lb_name,text)=RACObserve(model, name);
 
-        //这里不能使用基本数据类型,RAC中传递的都是id类型,使用基本类型会崩溃,所以使用map方法对返回值进行了更替
+        //这里不能使用基本数据类型,RAC中传递的都是id类型,使用基本类型会崩溃,所以使用map(映射)对返回值进行了更替,映射你可以理解成将一个东西变换成另一个吧,比如数据类型,字符串格式等等都可以这么做.
 
         RAC(self.lb_age,text)=[RACObserve(model, age) map:^id(id value) {
 
@@ -337,7 +339,119 @@ RACSubject作为代理有些局限性,代理方法不能有返回值
             [self.delagetaSubject sendCompleted];
         }
 
-- 未完待续
+### RACCommand
+
+#### RACCommand的普通使用
+
+一般情况下,RACCommand主要用来封装一些请求,事件等,举个例子,我们的tableView在下拉滚动时若想刷新数据需要向接口提供页码或者最后一个数据的ID,我们可以把请求封装进RACCommand里,想要获取数据的时候只要将页码或者ID传入RACCommand里就可以了,同时监控RACCommand何时完成,若完成后将数据加入到tableview的数组就可以了,这是一个平常用的比较多的场景.使用是主要有三个注意点
+
+* RACCommand必须返回信号,信号可以为空
+
+* RACCommand必须强引用
+
+* RACCommand发送完数据必须发送完成信号
+
+- 在viewModel中创建RACCommand,同时利用懒加载,在外界获取command的时候,直接执行下面这个方法
+
+        -(void)loadInfo{
+
+            //input就是控制器中,viewmodel执行command时excute传入的参数
+            RACCommand * command = [[RACCommand alloc]initWithSignalBlock:^RACSignal *(id input) {
+
+                //command必须有信号返回值,如果没有的话可以为[RACSignal empty]
+                return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber)
+                        {
+                            NSMutableDictionary * params = [NSMutableDictionary dictionary];
+
+                            params[@"build"] = @"3360";
+                            params[@"channel"] = @"appstore";
+                            params[@"plat"] = @"2";
+
+                            [FYRequestTool GET:@"http://app.bilibili.com/x/banner" parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+
+                                [subscriber sendNext:responseObject];
+
+                                //发送完信号必须发送完成信号,否则无法执行
+                                [subscriber sendCompleted];
+
+                            } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+
+                                [subscriber sendError:error];
+
+                            }];
+
+                        return [RACDisposable disposableWithBlock:^{
+
+                                [FYRequestTool cancel];
+
+                                NSLog(@"这里面可以写取消请求,完成信号后请求会取消");
+
+                                }];
+                        }];
+                }];
+
+            //必须强引用这个command,否则无法执行
+            self.command = command;
+
+        }
+
+- 在控制器端取到viewModel模型,并对command中带有数据的信号进行订阅,这里需要明白信号中的信号这个含义,RAC中最基础的就是信号,command也是一个信号,与signal不同的是,它返回的并不是数据而是一个信号,这个信号上带有数据
+
+        ViewModel * vm = [[ViewModel alloc]init];
+
+        //取到command信号中的信号,对其进行订阅
+        [vm.command.executionSignals.switchToLatest subscribeNext:^(id x) {
+
+            NSLog(@"%@",x);
+
+        } error:^(NSError *error) {
+
+            NSLog(@"%@",error);
+
+        } completed:^{
+
+            NSLog(@"完成");
+
+        }];
+
+        //必须要加这句话,否则command无法执行,excute传的参数若无用可以为nil,传的参数就是viewModel中RACCommand中block的input值,根据这个值我们可以做许多事情
+        //例如,封装一个tableview的翻页请求,每次翻页的时候可以通过excute把翻页的页码给他
+        [vm.command execute:nil];
+
+- 我们再来看一下RACCommand直接进行订阅是什么结果
+
+        //取到command信号
+        [vm.command.executionSignals subscribeNext:^(id x) {
+
+            NSLog(@"-------------------------%@",[x class]);
+
+            NSLog(@"这里获取到的x是一个带有数据的信号,需要对x做进一步订阅就可以获取到数据如上所示");
+
+        }];
+
+- 打印结果是
+
+        2016-08-23 18:13:42.437 the basis of RACCommand[10910:768132] -------------------------RACDynamicSignal
+        2016-08-23 18:13:42.437 the basis of RACCommand[10910:768132] 这里获取到的x是一个带有数据的信号,需要对x做进一步订阅就可以获取到数据如上所示
+
+由此可知RACCommand也是一个信号
+
+#### 监听RACCommand是否完成
+
+-原理很简单,还是利用的信号中的信号这一理念
+
+        //监听命令是否完成
+        [vm.command.executing subscribeNext:^(id x) {
+
+            //这里的x是一个带有数据的信号,若这个信号存在那么就说明command还在执行,否则说明没有执行或者执行完毕
+            if ([x boolValue]) {
+                NSLog(@"正在执行");
+            } else {
+                NSLog(@"执行未开始/执行完毕");
+            }
+        }];
+
+- 未完待
 
 
 
