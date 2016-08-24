@@ -1,5 +1,7 @@
 ## StudyForRAC
 
+[简书博客地址](http://www.jianshu.com/users/452e0bd1e30f/latest_articles)
+
 study for https://github.com/shuaiwang007/RAC
 
 If you have some questions, please tell me.
