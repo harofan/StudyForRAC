@@ -91,6 +91,7 @@
 		06643C951D59A77200D0837E /* RACSequence */ = {
 			isa = PBXGroup;
 			children = (
+				060C7B751D5AC1E1009D72E3 /* RACMulticastConnection */,
 				06643C961D59A78900D0837E /* RACSequenceVC.h */,
 				06643C971D59A78900D0837E /* RACSequenceVC.m */,
 			);
@@ -142,7 +143,6 @@
 			isa = PBXGroup;
 			children = (
 				060C7B791D5ACB1C009D72E3 /* RACCommand */,
-				060C7B751D5AC1E1009D72E3 /* RACMulticastConnection */,
 				06643C951D59A77200D0837E /* RACSequence */,
 				06643C8C1D59699600D0837E /* RACSubjectVC */,
 				06C4BE8E1D5468C90068DD84 /* RACSignal */,

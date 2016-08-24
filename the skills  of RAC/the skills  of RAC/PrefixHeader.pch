@@ -1,0 +1,28 @@
+//
+//  PrefixHeader.pch
+//  the skills  of RAC
+//
+//  Created by fy on 16/8/24.
+//  Copyright © 2016年 LY. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+
+#import "ReactiveCocoa.h"
+
+//define this constant if you want to use Masonry without the 'mas_' prefix
+#define MAS_SHORTHAND
+
+//define this constant if you want to enable auto-boxing for default syntax
+#define MAS_SHORTHAND_GLOBALS
+
+#import "Masonry.h"
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+#pragma mark - UI -
+
+
+#endif /* PrefixHeader_pch */

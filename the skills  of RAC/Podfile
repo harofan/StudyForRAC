@@ -7,4 +7,5 @@ target 'the skills  of RAC' do
 
   # Pods for the skills  of RAC
 pod ‘ReactiveCocoa’
+pod 'Masonry'
 end

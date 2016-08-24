@@ -8,6 +8,10 @@
 
 #import "AppDelegate.h"
 
+#import "MainVC.h"
+
+#define screedSize [UIScreen mainScreen].bounds
+
 @interface AppDelegate ()
 
 @end
@@ -17,6 +21,17 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    self.window = [[UIWindow alloc]initWithFrame:screedSize];
+    
+    MainVC * VC = [[MainVC alloc]init];
+    
+    UINavigationController * nav = [[UINavigationController alloc]initWithRootViewController:VC];
+    
+    self.window.rootViewController = nav;
+    
+    [self.window makeKeyAndVisible];
+    
     return YES;
 }
 

@@ -11,6 +11,10 @@
 		061362EA1D6D92C400AFD1E7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 061362E91D6D92C400AFD1E7 /* AppDelegate.m */; };
 		061362F21D6D92C400AFD1E7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 061362F11D6D92C400AFD1E7 /* Assets.xcassets */; };
 		061362F51D6D92C400AFD1E7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 061362F31D6D92C400AFD1E7 /* LaunchScreen.storyboard */; };
+		061362FF1D6D95FB00AFD1E7 /* MainVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 061362FD1D6D95FB00AFD1E7 /* MainVC.m */; };
+		061363001D6D95FB00AFD1E7 /* MainVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 061362FE1D6D95FB00AFD1E7 /* MainVC.xib */; };
+		061363081D6D9EC700AFD1E7 /* DelegateVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 061363061D6D9EC700AFD1E7 /* DelegateVC.m */; };
+		061363091D6D9EC700AFD1E7 /* DelegateVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 061363071D6D9EC700AFD1E7 /* DelegateVC.xib */; };
 		874FFEBFEDF1FC6C065E7D0D /* Pods_the_skills__of_RAC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 433E390D9B4F2412793B2912 /* Pods_the_skills__of_RAC.framework */; };
 /* End PBXBuildFile section */
 
@@ -22,6 +26,13 @@
 		061362F11D6D92C400AFD1E7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		061362F41D6D92C400AFD1E7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		061362F61D6D92C400AFD1E7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		061362FC1D6D95FB00AFD1E7 /* MainVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainVC.h; path = ../MainVC.h; sourceTree = "<group>"; };
+		061362FD1D6D95FB00AFD1E7 /* MainVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MainVC.m; path = ../MainVC.m; sourceTree = "<group>"; };
+		061362FE1D6D95FB00AFD1E7 /* MainVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MainVC.xib; path = ../MainVC.xib; sourceTree = "<group>"; };
+		061363021D6D9BDA00AFD1E7 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		061363051D6D9EC700AFD1E7 /* DelegateVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DelegateVC.h; sourceTree = "<group>"; };
+		061363061D6D9EC700AFD1E7 /* DelegateVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DelegateVC.m; sourceTree = "<group>"; };
+		061363071D6D9EC700AFD1E7 /* DelegateVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DelegateVC.xib; sourceTree = "<group>"; };
 		433E390D9B4F2412793B2912 /* Pods_the_skills__of_RAC.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_the_skills__of_RAC.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7248406A0C740C36D63BC194 /* Pods-the skills  of RAC.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-the skills  of RAC.release.xcconfig"; path = "Pods/Target Support Files/Pods-the skills  of RAC/Pods-the skills  of RAC.release.xcconfig"; sourceTree = "<group>"; };
 		BF396149D876F5DF97EBDB79 /* Pods-the skills  of RAC.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-the skills  of RAC.debug.xcconfig"; path = "Pods/Target Support Files/Pods-the skills  of RAC/Pods-the skills  of RAC.debug.xcconfig"; sourceTree = "<group>"; };
@@ -60,6 +71,11 @@
 		061362E41D6D92C400AFD1E7 /* the skills  of RAC */ = {
 			isa = PBXGroup;
 			children = (
+				061363031D6D9E9400AFD1E7 /* DelegateVC */,
+				061363021D6D9BDA00AFD1E7 /* PrefixHeader.pch */,
+				061362FC1D6D95FB00AFD1E7 /* MainVC.h */,
+				061362FD1D6D95FB00AFD1E7 /* MainVC.m */,
+				061362FE1D6D95FB00AFD1E7 /* MainVC.xib */,
 				061362E81D6D92C400AFD1E7 /* AppDelegate.h */,
 				061362E91D6D92C400AFD1E7 /* AppDelegate.m */,
 				061362F11D6D92C400AFD1E7 /* Assets.xcassets */,
@@ -76,6 +92,24 @@
 				061362E61D6D92C400AFD1E7 /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		061363031D6D9E9400AFD1E7 /* DelegateVC */ = {
+			isa = PBXGroup;
+			children = (
+				061363041D6D9EA400AFD1E7 /* Controllers */,
+			);
+			name = DelegateVC;
+			sourceTree = "<group>";
+		};
+		061363041D6D9EA400AFD1E7 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				061363051D6D9EC700AFD1E7 /* DelegateVC.h */,
+				061363061D6D9EC700AFD1E7 /* DelegateVC.m */,
+				061363071D6D9EC700AFD1E7 /* DelegateVC.xib */,
+			);
+			name = Controllers;
 			sourceTree = "<group>";
 		};
 		9F41D79C922CA2EA8520B4F4 /* Pods */ = {
@@ -156,8 +190,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				061363001D6D95FB00AFD1E7 /* MainVC.xib in Resources */,
 				061362F51D6D92C400AFD1E7 /* LaunchScreen.storyboard in Resources */,
 				061362F21D6D92C400AFD1E7 /* Assets.xcassets in Resources */,
+				061363091D6D9EC700AFD1E7 /* DelegateVC.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -216,8 +252,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				061362FF1D6D95FB00AFD1E7 /* MainVC.m in Sources */,
 				061362EA1D6D92C400AFD1E7 /* AppDelegate.m in Sources */,
 				061362E71D6D92C400AFD1E7 /* main.m in Sources */,
+				061363081D6D9EC700AFD1E7 /* DelegateVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -324,6 +362,7 @@
 			baseConfigurationReference = BF396149D876F5DF97EBDB79 /* Pods-the skills  of RAC.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/$(PRODUCT_NAME)/PrefixHeader.pch";
 				INFOPLIST_FILE = "the skills  of RAC/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "LY.the-skills--of-RAC";
@@ -336,6 +375,7 @@
 			baseConfigurationReference = 7248406A0C740C36D63BC194 /* Pods-the skills  of RAC.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/$(PRODUCT_NAME)/PrefixHeader.pch";
 				INFOPLIST_FILE = "the skills  of RAC/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "LY.the-skills--of-RAC";
