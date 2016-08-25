@@ -8,7 +8,7 @@
 
 #import "DelegateVC.h"
 
-@interface DelegateVC ()
+@interface DelegateVC ()<UITableViewDelegate,UITableViewDataSource>
 
 @end
 
@@ -17,21 +17,71 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    [self setupUI];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+#pragma mark - UI -
+
+-(void)setupUI{
+    
+    UITableView * tableview = [[UITableView alloc]initWithFrame:CGRectZero style:UITableViewStylePlain];
+    
+    [self.view addSubview:tableview];
+    
+    [tableview mas_makeConstraints:^(MASConstraintMaker *make) {
+        
+        make.edges.equalTo(0);
+        
+    }];
+    
+    [[self rac_signalForSelector:@selector(tableView:didSelectRowAtIndexPath:) fromProtocol:@protocol(UITableViewDelegate) ] subscribeNext:^(RACTuple * x) {
+        
+        NSLog(@"点击了");
+        
+    }];
+    
+    //这样子不带协议是无法代替代理的,虽然能达到效果,这个方法表示某个selector被调用时执行一段代码.带有协议参数的表示该selector实现了某个协议，所以可以用它来实现Delegate。
+    [[self rac_signalForSelector:@selector(tableView:didSelectRowAtIndexPath:)] subscribeNext:^(RACTuple* x) {
+        
+        NSLog(@"订阅");
+        NSLog(@"%@",[x class]);
+        NSLog(@"%@",x);
+    }];
+    
+    //这里是个坑,必须将代理最后设置,否则信号是无法订阅到的
+    //雷纯峰大大是这样子解释的:在设置代理的时候，系统会缓存这个代理对象实现了哪些代码方法
+    //如果将代理放在订阅信号前设置,那么当控制器成为代理时是无法缓存这个代理对象实现了哪些代码方法的
+    tableview.delegate = self;
+    
+    tableview.dataSource = self;
+    
+    [tableview registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
+    
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+#pragma mark - 数据源方法 -
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    
+    return 1;
+    
 }
-*/
+
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    
+    return 100;
+}
+
+-(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    
+    UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+    
+    cell.textLabel.text = @"点我";
+    
+    return cell;
+    
+}
+
+
 
 @end

@@ -39,6 +39,7 @@
     [tableview mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.edges.equalTo(0);
+        
     }];
     
     tableview.dataSource = self;
@@ -59,6 +60,7 @@
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
     return 100;
+    
 }
 
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -73,7 +75,7 @@
             break;
             
         case 1:
-            cell.textLabel.text = @"";
+            cell.textLabel.text = @"代替KVO";
             break;
             
         case 2:

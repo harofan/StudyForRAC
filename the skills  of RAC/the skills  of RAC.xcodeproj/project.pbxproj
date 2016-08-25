@@ -71,11 +71,11 @@
 		061362E41D6D92C400AFD1E7 /* the skills  of RAC */ = {
 			isa = PBXGroup;
 			children = (
-				061363031D6D9E9400AFD1E7 /* DelegateVC */,
-				061363021D6D9BDA00AFD1E7 /* PrefixHeader.pch */,
 				061362FC1D6D95FB00AFD1E7 /* MainVC.h */,
 				061362FD1D6D95FB00AFD1E7 /* MainVC.m */,
 				061362FE1D6D95FB00AFD1E7 /* MainVC.xib */,
+				061363031D6D9E9400AFD1E7 /* DelegateVC */,
+				061363021D6D9BDA00AFD1E7 /* PrefixHeader.pch */,
 				061362E81D6D92C400AFD1E7 /* AppDelegate.h */,
 				061362E91D6D92C400AFD1E7 /* AppDelegate.m */,
 				061362F11D6D92C400AFD1E7 /* Assets.xcassets */,
