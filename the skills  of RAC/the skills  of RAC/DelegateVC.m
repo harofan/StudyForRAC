@@ -38,16 +38,16 @@
     [[self rac_signalForSelector:@selector(tableView:didSelectRowAtIndexPath:) fromProtocol:@protocol(UITableViewDelegate) ] subscribeNext:^(RACTuple * x) {
         
         NSLog(@"点击了");
+        NSLog(@"%@,%@",x.first,x.second);
         
     }];
     
     //这样子不带协议是无法代替代理的,虽然能达到效果,这个方法表示某个selector被调用时执行一段代码.带有协议参数的表示该selector实现了某个协议，所以可以用它来实现Delegate。
-    [[self rac_signalForSelector:@selector(tableView:didSelectRowAtIndexPath:)] subscribeNext:^(RACTuple* x) {
-        
-        NSLog(@"订阅");
-        NSLog(@"%@",[x class]);
-        NSLog(@"%@",x);
-    }];
+//    [[self rac_signalForSelector:@selector(tableView:didSelectRowAtIndexPath:)] subscribeNext:^(RACTuple* x) {
+//        
+//        NSLog(@"%@",[x class]);
+//        NSLog(@"%@",x);
+//    }];
     
     //这里是个坑,必须将代理最后设置,否则信号是无法订阅到的
     //雷纯峰大大是这样子解释的:在设置代理的时候，系统会缓存这个代理对象实现了哪些代码方法

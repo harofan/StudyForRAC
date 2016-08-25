@@ -10,6 +10,8 @@
 
 #import "DelegateVC.h"
 
+#import "KVOVC.h"
+
 
 
 @interface MainVC ()<UITableViewDelegate,UITableViewDataSource>
@@ -111,14 +113,14 @@
             
             break;
         }
-//        case 1:
-//        {
-//            RACSubjectVC * vc = [[RACSubjectVC alloc]init];
-//            
-//            [self.navigationController pushViewController:vc animated:YES];
-//            
-//            break;
-//        }
+        case 1:
+        {
+            KVOVC * vc = [[KVOVC alloc]init];
+            
+            [self.navigationController pushViewController:vc animated:YES];
+            
+            break;
+        }
 //        case 2:
 //        {
 //            RACSequenceVC * vc = [[RACSequenceVC alloc]init];
