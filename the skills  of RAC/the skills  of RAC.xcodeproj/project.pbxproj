@@ -17,6 +17,8 @@
 		061363091D6D9EC700AFD1E7 /* DelegateVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 061363071D6D9EC700AFD1E7 /* DelegateVC.xib */; };
 		06ADFDE61D70200B00ACF89E /* TimerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 06ADFDE41D70200B00ACF89E /* TimerVC.m */; };
 		06ADFDE71D70200B00ACF89E /* TimerVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 06ADFDE51D70200B00ACF89E /* TimerVC.xib */; };
+		06ADFDEC1D70248E00ACF89E /* TargetOfUISignalVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 06ADFDEA1D70248E00ACF89E /* TargetOfUISignalVC.m */; };
+		06ADFDED1D70248E00ACF89E /* TargetOfUISignalVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 06ADFDEB1D70248E00ACF89E /* TargetOfUISignalVC.xib */; };
 		06E743ED1D6E92CF004B05DD /* KVOVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 06E743EB1D6E92CF004B05DD /* KVOVC.m */; };
 		06E743EE1D6E92CF004B05DD /* KVOVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 06E743EC1D6E92CF004B05DD /* KVOVC.xib */; };
 		06E743F41D6EC087004B05DD /* EventVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 06E743F21D6EC087004B05DD /* EventVC.m */; };
@@ -44,6 +46,9 @@
 		06ADFDE31D70200B00ACF89E /* TimerVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimerVC.h; sourceTree = "<group>"; };
 		06ADFDE41D70200B00ACF89E /* TimerVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimerVC.m; sourceTree = "<group>"; };
 		06ADFDE51D70200B00ACF89E /* TimerVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TimerVC.xib; sourceTree = "<group>"; };
+		06ADFDE91D70248E00ACF89E /* TargetOfUISignalVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TargetOfUISignalVC.h; sourceTree = "<group>"; };
+		06ADFDEA1D70248E00ACF89E /* TargetOfUISignalVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TargetOfUISignalVC.m; sourceTree = "<group>"; };
+		06ADFDEB1D70248E00ACF89E /* TargetOfUISignalVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TargetOfUISignalVC.xib; sourceTree = "<group>"; };
 		06E743EA1D6E92CF004B05DD /* KVOVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KVOVC.h; sourceTree = "<group>"; };
 		06E743EB1D6E92CF004B05DD /* KVOVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KVOVC.m; sourceTree = "<group>"; };
 		06E743EC1D6E92CF004B05DD /* KVOVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KVOVC.xib; sourceTree = "<group>"; };
@@ -91,6 +96,7 @@
 		061362E41D6D92C400AFD1E7 /* the skills  of RAC */ = {
 			isa = PBXGroup;
 			children = (
+				06ADFDE81D70245400ACF89E /* TargetOfUISignalVC */,
 				06ADFDE21D701FE500ACF89E /* TimerVC */,
 				06E743F61D6EC35B004B05DD /* NSNotificationVC */,
 				06E743EF1D6EC062004B05DD /* EventVC */,
@@ -144,6 +150,16 @@
 				06ADFDE51D70200B00ACF89E /* TimerVC.xib */,
 			);
 			name = TimerVC;
+			sourceTree = "<group>";
+		};
+		06ADFDE81D70245400ACF89E /* TargetOfUISignalVC */ = {
+			isa = PBXGroup;
+			children = (
+				06ADFDE91D70248E00ACF89E /* TargetOfUISignalVC.h */,
+				06ADFDEA1D70248E00ACF89E /* TargetOfUISignalVC.m */,
+				06ADFDEB1D70248E00ACF89E /* TargetOfUISignalVC.xib */,
+			);
+			name = TargetOfUISignalVC;
 			sourceTree = "<group>";
 		};
 		06E743E81D6E92A7004B05DD /* KVOVC */ = {
@@ -280,6 +296,7 @@
 			files = (
 				061363001D6D95FB00AFD1E7 /* MainVC.xib in Resources */,
 				06E743F51D6EC087004B05DD /* EventVC.xib in Resources */,
+				06ADFDED1D70248E00ACF89E /* TargetOfUISignalVC.xib in Resources */,
 				06E743FC1D6EC3CE004B05DD /* NSNotificationVC.xib in Resources */,
 				061362F51D6D92C400AFD1E7 /* LaunchScreen.storyboard in Resources */,
 				061362F21D6D92C400AFD1E7 /* Assets.xcassets in Resources */,
@@ -346,6 +363,7 @@
 			files = (
 				061362FF1D6D95FB00AFD1E7 /* MainVC.m in Sources */,
 				061362EA1D6D92C400AFD1E7 /* AppDelegate.m in Sources */,
+				06ADFDEC1D70248E00ACF89E /* TargetOfUISignalVC.m in Sources */,
 				06E743ED1D6E92CF004B05DD /* KVOVC.m in Sources */,
 				06E743F41D6EC087004B05DD /* EventVC.m in Sources */,
 				061362E71D6D92C400AFD1E7 /* main.m in Sources */,

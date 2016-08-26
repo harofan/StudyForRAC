@@ -18,6 +18,8 @@
 
 #import "TimerVC.h"
 
+#import "TargetOfUISignalVC.h"
+
 @interface MainVC ()<UITableViewDelegate,UITableViewDataSource>
 
 @end
@@ -65,7 +67,7 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
-    return 5;
+    return 6;
     
 }
 
@@ -94,6 +96,10 @@
             
         case 4:
             cell.textLabel.text = @"代替定时器";
+            break;
+            
+        case 5:
+            cell.textLabel.text = @"代替UI控件的addtarget";
             break;
             
         default:
@@ -146,6 +152,15 @@
         case 4:
         {
             TimerVC * vc = [[TimerVC alloc]init];
+            
+            [self.navigationController pushViewController:vc animated:YES];
+            
+            break;
+        }
+            
+        case 5:
+        {
+            TargetOfUISignalVC * vc = [[TargetOfUISignalVC alloc]init];
             
             [self.navigationController pushViewController:vc animated:YES];
             
