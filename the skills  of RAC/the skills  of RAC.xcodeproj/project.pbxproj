@@ -17,6 +17,10 @@
 		061363091D6D9EC700AFD1E7 /* DelegateVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 061363071D6D9EC700AFD1E7 /* DelegateVC.xib */; };
 		06E743ED1D6E92CF004B05DD /* KVOVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 06E743EB1D6E92CF004B05DD /* KVOVC.m */; };
 		06E743EE1D6E92CF004B05DD /* KVOVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 06E743EC1D6E92CF004B05DD /* KVOVC.xib */; };
+		06E743F41D6EC087004B05DD /* EventVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 06E743F21D6EC087004B05DD /* EventVC.m */; };
+		06E743F51D6EC087004B05DD /* EventVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 06E743F31D6EC087004B05DD /* EventVC.xib */; };
+		06E743FB1D6EC3CE004B05DD /* NSNotificationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 06E743F91D6EC3CE004B05DD /* NSNotificationVC.m */; };
+		06E743FC1D6EC3CE004B05DD /* NSNotificationVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 06E743FA1D6EC3CE004B05DD /* NSNotificationVC.xib */; };
 		874FFEBFEDF1FC6C065E7D0D /* Pods_the_skills__of_RAC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 433E390D9B4F2412793B2912 /* Pods_the_skills__of_RAC.framework */; };
 /* End PBXBuildFile section */
 
@@ -38,6 +42,12 @@
 		06E743EA1D6E92CF004B05DD /* KVOVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KVOVC.h; sourceTree = "<group>"; };
 		06E743EB1D6E92CF004B05DD /* KVOVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KVOVC.m; sourceTree = "<group>"; };
 		06E743EC1D6E92CF004B05DD /* KVOVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = KVOVC.xib; sourceTree = "<group>"; };
+		06E743F11D6EC087004B05DD /* EventVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventVC.h; sourceTree = "<group>"; };
+		06E743F21D6EC087004B05DD /* EventVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventVC.m; sourceTree = "<group>"; };
+		06E743F31D6EC087004B05DD /* EventVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventVC.xib; sourceTree = "<group>"; };
+		06E743F81D6EC3CE004B05DD /* NSNotificationVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSNotificationVC.h; sourceTree = "<group>"; };
+		06E743F91D6EC3CE004B05DD /* NSNotificationVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSNotificationVC.m; sourceTree = "<group>"; };
+		06E743FA1D6EC3CE004B05DD /* NSNotificationVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NSNotificationVC.xib; sourceTree = "<group>"; };
 		433E390D9B4F2412793B2912 /* Pods_the_skills__of_RAC.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_the_skills__of_RAC.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7248406A0C740C36D63BC194 /* Pods-the skills  of RAC.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-the skills  of RAC.release.xcconfig"; path = "Pods/Target Support Files/Pods-the skills  of RAC/Pods-the skills  of RAC.release.xcconfig"; sourceTree = "<group>"; };
 		BF396149D876F5DF97EBDB79 /* Pods-the skills  of RAC.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-the skills  of RAC.debug.xcconfig"; path = "Pods/Target Support Files/Pods-the skills  of RAC/Pods-the skills  of RAC.debug.xcconfig"; sourceTree = "<group>"; };
@@ -76,6 +86,8 @@
 		061362E41D6D92C400AFD1E7 /* the skills  of RAC */ = {
 			isa = PBXGroup;
 			children = (
+				06E743F61D6EC35B004B05DD /* NSNotificationVC */,
+				06E743EF1D6EC062004B05DD /* EventVC */,
 				061363031D6D9E9400AFD1E7 /* DelegateVC */,
 				06E743E81D6E92A7004B05DD /* KVOVC */,
 				061362FC1D6D95FB00AFD1E7 /* MainVC.h */,
@@ -132,6 +144,42 @@
 				06E743EA1D6E92CF004B05DD /* KVOVC.h */,
 				06E743EB1D6E92CF004B05DD /* KVOVC.m */,
 				06E743EC1D6E92CF004B05DD /* KVOVC.xib */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		06E743EF1D6EC062004B05DD /* EventVC */ = {
+			isa = PBXGroup;
+			children = (
+				06E743F01D6EC06F004B05DD /* Controllers */,
+			);
+			name = EventVC;
+			sourceTree = "<group>";
+		};
+		06E743F01D6EC06F004B05DD /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				06E743F11D6EC087004B05DD /* EventVC.h */,
+				06E743F21D6EC087004B05DD /* EventVC.m */,
+				06E743F31D6EC087004B05DD /* EventVC.xib */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		06E743F61D6EC35B004B05DD /* NSNotificationVC */ = {
+			isa = PBXGroup;
+			children = (
+				06E743F71D6EC3B2004B05DD /* Controllers */,
+			);
+			name = NSNotificationVC;
+			sourceTree = "<group>";
+		};
+		06E743F71D6EC3B2004B05DD /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				06E743F81D6EC3CE004B05DD /* NSNotificationVC.h */,
+				06E743F91D6EC3CE004B05DD /* NSNotificationVC.m */,
+				06E743FA1D6EC3CE004B05DD /* NSNotificationVC.xib */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -215,6 +263,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				061363001D6D95FB00AFD1E7 /* MainVC.xib in Resources */,
+				06E743F51D6EC087004B05DD /* EventVC.xib in Resources */,
+				06E743FC1D6EC3CE004B05DD /* NSNotificationVC.xib in Resources */,
 				061362F51D6D92C400AFD1E7 /* LaunchScreen.storyboard in Resources */,
 				061362F21D6D92C400AFD1E7 /* Assets.xcassets in Resources */,
 				061363091D6D9EC700AFD1E7 /* DelegateVC.xib in Resources */,
@@ -280,8 +330,10 @@
 				061362FF1D6D95FB00AFD1E7 /* MainVC.m in Sources */,
 				061362EA1D6D92C400AFD1E7 /* AppDelegate.m in Sources */,
 				06E743ED1D6E92CF004B05DD /* KVOVC.m in Sources */,
+				06E743F41D6EC087004B05DD /* EventVC.m in Sources */,
 				061362E71D6D92C400AFD1E7 /* main.m in Sources */,
 				061363081D6D9EC700AFD1E7 /* DelegateVC.m in Sources */,
+				06E743FB1D6EC3CE004B05DD /* NSNotificationVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

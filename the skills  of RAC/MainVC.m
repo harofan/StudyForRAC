@@ -12,7 +12,9 @@
 
 #import "KVOVC.h"
 
+#import "EventVC.h"
 
+#import "NSNotificationVC.h"
 
 @interface MainVC ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -81,11 +83,11 @@
             break;
             
         case 2:
-            cell.textLabel.text = @"";
+            cell.textLabel.text = @"监听事件";
             break;
             
         case 3:
-            cell.textLabel.text = @"";
+            cell.textLabel.text = @"代替通知";
             break;
             
         case 4:
@@ -121,24 +123,24 @@
             
             break;
         }
-//        case 2:
-//        {
-//            RACSequenceVC * vc = [[RACSequenceVC alloc]init];
-//            
-//            [self.navigationController pushViewController:vc animated:YES];
-//            
-//            break;
-//        }
-//            
-//        case 3:
-//        {
-//            RACMulticastConnectionVC * vc = [[RACMulticastConnectionVC alloc]init];
-//            
-//            [self.navigationController pushViewController:vc animated:YES];
-//            
-//            break;
-//        }
-//            
+        case 2:
+        {
+            EventVC * vc = [[EventVC alloc]init];
+            
+            [self.navigationController pushViewController:vc animated:YES];
+            
+            break;
+        }
+
+        case 3:
+        {
+            NSNotificationVC * vc = [[NSNotificationVC alloc]init];
+            
+            [self.navigationController pushViewController:vc animated:YES];
+            
+            break;
+        }
+//
 //        case 4:
 //        {
 //            RACCommandVC * vc = [[RACCommandVC alloc]init];

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NSNotificationVC">
+            <connections>
+                <outlet property="tf" destination="Xod-E4-g71" id="Bbn-xw-XqR"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Xod-E4-g71">
+                    <rect key="frame" x="20" y="171" width="560" height="30"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D6D-MC-Bpk">
+                    <rect key="frame" x="278" y="221" width="45" height="30"/>
+                    <state key="normal" title="cancel"/>
+                    <connections>
+                        <action selector="didClickCancelBtn:" destination="-1" eventType="touchUpInside" id="nIm-Ip-CWW"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="D6D-MC-Bpk" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Yk0-h1-lYn"/>
+                <constraint firstItem="Xod-E4-g71" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="asI-gJ-oH4"/>
+                <constraint firstItem="Xod-E4-g71" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="dmd-sn-Xw2"/>
+                <constraint firstItem="Xod-E4-g71" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="171" id="j1s-HG-OUR"/>
+                <constraint firstAttribute="trailing" secondItem="Xod-E4-g71" secondAttribute="trailing" constant="20" id="yAz-Yu-0Hs"/>
+                <constraint firstItem="D6D-MC-Bpk" firstAttribute="top" secondItem="Xod-E4-g71" secondAttribute="bottom" constant="20" id="z9W-7R-sHp"/>
+            </constraints>
+        </view>
+    </objects>
+</document>
