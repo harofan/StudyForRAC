@@ -508,7 +508,71 @@ RACSubject作为代理有些局限性,代理方法不能有返回值
 
 #### 代替通知
 
-这里是有个坑的,单纯的写完订阅通知的信号会发现每次都会执行,而且叠加次数会增加
+这里是有个坑的,单纯的写完订阅通知的信号会发现每次都会执行,而且叠加次数会增加,效果如图所示,所以我们要想办法把通知订阅的信号给释放掉,所以用到了takeUntil这个方法,后面我会把它和别的方法放在一起详细讲的
+
+![image](https://github.com/SkyHarute/StudyForRAC/blob/master/imageFile/2.jpg)
+
+以textfiled成为第一响应者接收键盘弹出的同志为例,我们可以这么写通知
+
+        //代替通知
+        //takeUntil会接收一个signal,当signal触发后会把之前的信号释放掉
+        [[[[NSNotificationCenter defaultCenter] rac_addObserverForName:UIKeyboardDidShowNotification object:nil] takeUntil:self.rac_willDeallocSignal] subscribeNext:^(id x) {
+
+            NSLog(@"键盘弹出");
+
+        }];
+
+这个方法虽然能得到相同的效果,但并不能代替通知
+
+        //这个写法有个问题,这样子写信号不会被释放,当你再次收到键盘弹出的通知时他会叠加上次的信号进行执行,并一直叠加下去,所以我们在用上面的写法
+        //    [[[NSNotificationCenter defaultCenter] rac_addObserverForName:UIKeyboardDidShowNotification object:nil] subscribeNext:^(id x) {
+        
+        //        NSLog(@"键盘弹出");
+
+        //    }];
+
+这里再给大家举例一个写法思路,可以自己创建一个信号,当这个信号执行时通知会被释放
+
+        //这里这样写只是为了给大家开拓一种思路,selector的方法可以应需求更改,即当这个方法执行后,产生一个信号告知控制器释放掉这个订阅的信号
+        RACSignal * deallocSignal = [self rac_signalForSelector:@selector(viewWillDisappear:)];
+
+        [[[[NSNotificationCenter defaultCenter] rac_addObserverForName:@"haha" object:nil] takeUntil:deallocSignal] subscribeNext:^(id x) {
+
+            NSLog(@"haha");
+
+        }];
+
+#### 定时器
+
+延时执行
+
+        //五秒后执行一次
+        [[RACScheduler mainThreadScheduler]afterDelay:5 schedule:^{
+
+            NSLog(@"五秒后执行一次");
+
+        }];
+
+定时执行
+
+        //每隔两秒执行一次
+        //这里要加takeUntil条件限制一下否则当控制器pop后依旧会执行
+        [[[RACSignal interval:2 onScheduler:[RACScheduler mainThreadScheduler]] takeUntil:self.rac_willDeallocSignal ] subscribeNext:^(id x) {
+
+            NSLog(@"每两秒执行一次");
+
+        }];
+
+#### 代替addTarget
+
+详细的使用方法在我写RACSignal时有写,基本技巧就是翻看RAC框架中UI控件的分类基本就可以得知方法
+
+        //输出textfiled中的数据,具体的第一篇笔记有详细讲述
+        [[self.textfiled rac_textSignal] subscribeNext:^(id x) {
+
+            NSLog(@"%@",x);
+
+        }];
 - 未完待
 
 
