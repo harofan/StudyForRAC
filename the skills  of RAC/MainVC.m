@@ -16,6 +16,8 @@
 
 #import "NSNotificationVC.h"
 
+#import "TimerVC.h"
+
 @interface MainVC ()<UITableViewDelegate,UITableViewDataSource>
 
 @end
@@ -63,7 +65,7 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
-    return 100;
+    return 5;
     
 }
 
@@ -91,7 +93,7 @@
             break;
             
         case 4:
-            cell.textLabel.text = @"";
+            cell.textLabel.text = @"代替定时器";
             break;
             
         default:
@@ -140,15 +142,15 @@
             
             break;
         }
-//
-//        case 4:
-//        {
-//            RACCommandVC * vc = [[RACCommandVC alloc]init];
-//            
-//            [self.navigationController pushViewController:vc animated:YES];
-//            
-//            break;
-//        }
+
+        case 4:
+        {
+            TimerVC * vc = [[TimerVC alloc]init];
+            
+            [self.navigationController pushViewController:vc animated:YES];
+            
+            break;
+        }
             
         default:
             break;
