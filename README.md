@@ -26,6 +26,10 @@ the basis of RACSignal 文件夹主要讲述了RACSignal这个类该如何去使
 
 the basis of RACSubject 文件夹主要讲述了RACSubject与RACSignal的小区别,以及RACSubject如何作为代理去使用 
 
+the basis of RACCommand 文件夹主要讲的是RACCommand如何使用,并监听完成情况
+
+the skills of RAC 文件夹主要讲的是RAC的使用技巧,主要包括UI控件addTarget的替代,代替代理,代替通知,代替KVO,监听事件,定时器
+
 ### 我们为什么要学习RAC?
 
 RAC是github团队开发的一套超重量级开源框架
@@ -453,6 +457,58 @@ RACSubject作为代理有些局限性,代理方法不能有返回值
             }
         }];
 
+### RAC的使用技巧
+
+#### 代替代理
+
+使用RAC代替代理时,rac_signalForSelector: fromProtocol:这个代替代理的方法使用时,切记要将self设为代理这句话放在订阅代理信号的后面写,否则会无法执行
+        
+        //这里订阅收到的是一个x,当一个页面存在多个tableview时,我们可以对x进行判断看是哪个tableview
+        [[self rac_signalForSelector:@selector(tableView:didSelectRowAtIndexPath:) fromProtocol:@protocol(UITableViewDelegate) ] subscribeNext:^(RACTuple * x) {
+
+            NSLog(@"点击了");
+
+            NSLog(@"%@,%@",x.first,x.second);
+
+        }];
+
+        //这样子不带协议是无法代替代理的,虽然能达到效果,这个方法表示某个selector被调用时执行一段代码.带有协议参数的表示该selector实现了某个协议，所以可以用它来实现Delegate。
+        //    [[self rac_signalForSelector:@selector(tableView:didSelectRowAtIndexPath:)] subscribeNext:^(RACTuple* x) {
+                
+        //        NSLog(@"%@",[x class]);
+
+        //        NSLog(@"%@",x);
+        //    }];
+
+        //这里是个坑,必须将代理最后设置,否则信号是无法订阅到的
+        //雷纯峰大大是这样子解释的:在设置代理的时候，系统会缓存这个代理对象实现了哪些代码方法
+        //如果将代理放在订阅信号前设置,那么当控制器成为代理时是无法缓存这个代理对象实现了哪些代码方法的
+        tableview.delegate = self;
+
+#### 代替KVO
+
+使用RAC代替KVO很简单,一句话就可以搞定,而且相比传统的KVO,不仅代码不用放在一起写美观了很多,同时还能达到高聚合低耦合的目标
+
+        //代替KVO
+        [RACObserve(scrollView, contentOffset) subscribeNext:^(id x) {
+
+            NSLog(@"%@",x);
+
+        }];
+
+#### 监听事件
+
+同样简单,一句话搞定
+
+        [[btn rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
+
+            NSLog(@"点击了按钮");
+
+        }];
+
+#### 代替通知
+
+这里是有个坑的,单纯的写完订阅通知的信号会发现每次都会执行,而且叠加次数会增加
 - 未完待
 
 
