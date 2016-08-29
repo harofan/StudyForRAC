@@ -10,6 +10,8 @@
 
 #import "MapVC.h"
 
+#import "SignalCombinerVC.h"
+
 
 @interface MainVC ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -74,7 +76,7 @@
             break;
             
         case 1:
-            cell.textLabel.text = @"代替KVO";
+            cell.textLabel.text = @"多个信号组合处理";
             break;
             
         case 2:
@@ -114,14 +116,14 @@
             
             break;
         }
-//        case 1:
-//        {
-//            KVOVC * vc = [[KVOVC alloc]init];
-//            
-//            [self.navigationController pushViewController:vc animated:YES];
-//            
-//            break;
-//        }
+        case 1:
+        {
+            SignalCombinerVC * vc = [[SignalCombinerVC alloc]init];
+            
+            [self.navigationController pushViewController:vc animated:YES];
+            
+            break;
+        }
 //        case 2:
 //        {
 //            EventVC * vc = [[EventVC alloc]init];

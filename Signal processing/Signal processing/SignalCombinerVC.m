@@ -1,16 +1,14 @@
 //
-//  MapVC.m
+//  SignalCombinerVC.m
 //  Signal processing
 //
 //  Created by fy on 16/8/29.
 //  Copyright © 2016年 LY. All rights reserved.
 //
 
-#import "MapVC.h"
+#import "SignalCombinerVC.h"
 
-#import "RACReturnSignal.h"
-
-@interface MapVC ()
+@interface SignalCombinerVC ()
 
 @property(nonatomic,strong)UILabel * lb_name;
 
@@ -20,9 +18,13 @@
 
 @property(nonatomic,strong)UITextField * tf_age;
 
+@property(nonatomic,strong)RACSignal * signalA;
+
+@property(nonatomic,strong)RACSignal * signalB;
+
 @end
 
-@implementation MapVC
+@implementation SignalCombinerVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -30,12 +32,55 @@
     
     [self createupUI];
     
-    //测试Map方法
-    [self testTheMethodOfMap];
+    [self createSignal];
     
-    //测试FlatternMap
-    [self testTheMethodOfFlatternMap];
+    [self testTheMethodOfConcat];
+}
+
+#pragma mark - 创建信号 -
+-(void)createSignal{
     
+    RACSignal * signalA = [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+        
+        [subscriber sendNext:@"A"];
+        
+        [subscriber sendCompleted];
+        
+        return [RACDisposable disposableWithBlock:^{
+            
+        }];
+    }];
+    
+    RACSignal * signalB = [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+        
+        [subscriber sendNext:@"B"];
+        
+        [subscriber sendCompleted];
+        
+        return [RACDisposable disposableWithBlock:^{
+            
+        }];
+    }];
+    
+    self.signalA = signalA;
+    
+    self.signalB = signalB;
+    
+}
+
+#pragma mark - 信号组合处理 -
+-(void)testTheMethodOfConcat{
+    
+    //这相当于网络请求中的依赖,必须先执行完信号A才会执行信号B
+    //经常用作一个请求执行完毕后,才会执行另一个请求
+    //注意信号A必须要执行发送完成信号,否则信号B无法执行
+    RACSignal * concatSignal = [self.signalA concat:self.signalB];
+    
+    //这里我们是对这个拼接信号进行订阅
+    [concatSignal subscribeNext:^(id x) {
+        
+        NSLog(@"%@",x);
+    }];
 }
 
 #pragma mark - UI -
@@ -116,41 +161,6 @@
     
 }
 
--(void)testTheMethodOfMap{
-    
-    //这里可以使用绑定写法来更快捷的达到目的,这里主要是为了体验map所以就不展示了,详情请看RACSignal的绑定
-    //这里的映射(map)前面有讲过主要是为了对block的返回值进行处理
-    @weakify(self);
-    [[[self.tf_name rac_textSignal] map:^id(id value) {
-        
-        return [NSString stringWithFormat:@"名字是:%@",value];
-        
-    }] subscribeNext:^(id x) {
-    
-        @strongify(self);
-        self.lb_name.text = x;
-        
-    }];
-    
-}
 
--(void)testTheMethodOfFlatternMap{
-    
-    
-    //FlatternMap返回的是一个信号,而map返回的是信号,一般情况下我们使用的是map,只有信号中的信号我们才会使用FlatternMap
-    //同时使用FlatternMap我们需要导入RACReturnSignal.h
-    @weakify(self);
-   [[[self.tf_age rac_textSignal] flattenMap:^RACStream *(id value) {
-        
-       return [RACReturnSignal return:[NSString stringWithFormat:@"年龄是:%@",value]];
-       
-   }] subscribeNext:^(id x) {
-       
-       @strongify(self);
-       self.lb_age.text = x;
-       
-   }];
-    
-}
 
 @end

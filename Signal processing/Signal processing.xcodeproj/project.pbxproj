@@ -14,6 +14,10 @@
 		06F0E9101D73D4430086F1DC /* MainVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 06F0E90F1D73D4430086F1DC /* MainVC.m */; };
 		06F0E9161D73D7150086F1DC /* MapVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 06F0E9141D73D7150086F1DC /* MapVC.m */; };
 		06F0E9171D73D7150086F1DC /* MapVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 06F0E9151D73D7150086F1DC /* MapVC.xib */; };
+		06F0E91C1D73D9F60086F1DC /* PersonModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 06F0E91B1D73D9F60086F1DC /* PersonModel.m */; };
+		06F0E91F1D73DA040086F1DC /* PersonViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 06F0E91E1D73DA040086F1DC /* PersonViewModel.m */; };
+		06F0E9241D7404A30086F1DC /* SignalCombinerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 06F0E9221D7404A30086F1DC /* SignalCombinerVC.m */; };
+		06F0E9251D7404A30086F1DC /* SignalCombinerVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 06F0E9231D7404A30086F1DC /* SignalCombinerVC.xib */; };
 		2707C99CC9C97882F888C8B0 /* Pods_Signal_processing.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57242142E1E58C71EF0AE164 /* Pods_Signal_processing.framework */; };
 /* End PBXBuildFile section */
 
@@ -31,6 +35,13 @@
 		06F0E9131D73D7150086F1DC /* MapVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapVC.h; sourceTree = "<group>"; };
 		06F0E9141D73D7150086F1DC /* MapVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapVC.m; sourceTree = "<group>"; };
 		06F0E9151D73D7150086F1DC /* MapVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapVC.xib; sourceTree = "<group>"; };
+		06F0E91A1D73D9F60086F1DC /* PersonModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonModel.h; sourceTree = "<group>"; };
+		06F0E91B1D73D9F60086F1DC /* PersonModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonModel.m; sourceTree = "<group>"; };
+		06F0E91D1D73DA040086F1DC /* PersonViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonViewModel.h; sourceTree = "<group>"; };
+		06F0E91E1D73DA040086F1DC /* PersonViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonViewModel.m; sourceTree = "<group>"; };
+		06F0E9211D7404A30086F1DC /* SignalCombinerVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignalCombinerVC.h; sourceTree = "<group>"; };
+		06F0E9221D7404A30086F1DC /* SignalCombinerVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignalCombinerVC.m; sourceTree = "<group>"; };
+		06F0E9231D7404A30086F1DC /* SignalCombinerVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SignalCombinerVC.xib; sourceTree = "<group>"; };
 		1742872D3A826588BEAE4437 /* Pods-Signal processing.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Signal processing.release.xcconfig"; path = "Pods/Target Support Files/Pods-Signal processing/Pods-Signal processing.release.xcconfig"; sourceTree = "<group>"; };
 		57242142E1E58C71EF0AE164 /* Pods_Signal_processing.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Signal_processing.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A453FF2E888DBCDA748BBFB5 /* Pods-Signal processing.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Signal processing.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Signal processing/Pods-Signal processing.debug.xcconfig"; sourceTree = "<group>"; };
@@ -69,6 +80,7 @@
 		06F0E8F51D73D2360086F1DC /* Signal processing */ = {
 			isa = PBXGroup;
 			children = (
+				06F0E9201D7404640086F1DC /* SignalCombinerVC */,
 				06F0E9121D73D6F90086F1DC /* MapVC */,
 				06F0E90E1D73D43D0086F1DC /* MainVC.h */,
 				06F0E90F1D73D4430086F1DC /* MainVC.m */,
@@ -94,11 +106,41 @@
 		06F0E9121D73D6F90086F1DC /* MapVC */ = {
 			isa = PBXGroup;
 			children = (
+				06F0E9191D73D9E90086F1DC /* Model */,
+				06F0E9181D73D9DF0086F1DC /* ViewModel */,
 				06F0E9131D73D7150086F1DC /* MapVC.h */,
 				06F0E9141D73D7150086F1DC /* MapVC.m */,
 				06F0E9151D73D7150086F1DC /* MapVC.xib */,
 			);
 			name = MapVC;
+			sourceTree = "<group>";
+		};
+		06F0E9181D73D9DF0086F1DC /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				06F0E91D1D73DA040086F1DC /* PersonViewModel.h */,
+				06F0E91E1D73DA040086F1DC /* PersonViewModel.m */,
+			);
+			name = ViewModel;
+			sourceTree = "<group>";
+		};
+		06F0E9191D73D9E90086F1DC /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				06F0E91A1D73D9F60086F1DC /* PersonModel.h */,
+				06F0E91B1D73D9F60086F1DC /* PersonModel.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		06F0E9201D7404640086F1DC /* SignalCombinerVC */ = {
+			isa = PBXGroup;
+			children = (
+				06F0E9211D7404A30086F1DC /* SignalCombinerVC.h */,
+				06F0E9221D7404A30086F1DC /* SignalCombinerVC.m */,
+				06F0E9231D7404A30086F1DC /* SignalCombinerVC.xib */,
+			);
+			name = SignalCombinerVC;
 			sourceTree = "<group>";
 		};
 		48CB53542402D0EA4F271C24 /* Frameworks */ = {
@@ -182,6 +224,7 @@
 				06F0E9061D73D2360086F1DC /* LaunchScreen.storyboard in Resources */,
 				06F0E9171D73D7150086F1DC /* MapVC.xib in Resources */,
 				06F0E9031D73D2360086F1DC /* Assets.xcassets in Resources */,
+				06F0E9251D7404A30086F1DC /* SignalCombinerVC.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -240,6 +283,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				06F0E9241D7404A30086F1DC /* SignalCombinerVC.m in Sources */,
+				06F0E91C1D73D9F60086F1DC /* PersonModel.m in Sources */,
+				06F0E91F1D73DA040086F1DC /* PersonViewModel.m in Sources */,
 				06F0E9101D73D4430086F1DC /* MainVC.m in Sources */,
 				06F0E9161D73D7150086F1DC /* MapVC.m in Sources */,
 				06F0E8FB1D73D2360086F1DC /* AppDelegate.m in Sources */,
