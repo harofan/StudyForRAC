@@ -30,6 +30,8 @@ the basis of RACCommand 文件夹主要讲的是RACCommand如何使用,并监听
 
 the skills of RAC 文件夹主要讲的是RAC的使用技巧,主要包括UI控件addTarget的替代,代替代理,代替通知,代替KVO,监听事件,定时器
 
+Signal processing 文件夹主要讲的是信号的组合和处理
+
 ### 我们为什么要学习RAC?
 
 RAC是github团队开发的一套超重量级开源框架
@@ -574,6 +576,127 @@ RACSubject作为代理有些局限性,代理方法不能有返回值
 
         }];
 
+### 信号的组合处理
+
+- 本部分参考了峥吖前辈的博客,并结合了自己的一些实践和想法
+
+#### 信号的依赖
+
+- 使用场景是当信号A执行完才会执行信号B,和请求的依赖很类似,例如请求A请求完毕才执行请求B,我们需要注意信号A必须要执行发送完成信号,否则信号B无法执行
+
+        //这相当于网络请求中的依赖,必须先执行完信号A才会执行信号B
+        //经常用作一个请求执行完毕后,才会执行另一个请求
+        //注意信号A必须要执行发送完成信号,否则信号B无法执行
+        RACSignal * concatSignal = [self.signalA concat:self.signalB];
+
+        //这里我们是对这个拼接信号进行订阅
+        [concatSignal subscribeNext:^(id x) {
+    
+            NSLog(@"%@",x);
+
+        }];
+
+#### 信号的条件执行
+
+- 使用场景当信号A执行后才会执行信号B,同时信号A不会被订阅到,也就不会被执行
+
+        //当地一个信号执行完才会执行then后面的信号,同时第一个信号发送出来的东西不会被订阅到
+        @weakify(self);
+        [[self.signalA then:^RACSignal *{
+
+            @strongify(self);
+            return self.signalB;
+
+        }] subscribeNext:^(id x) {
+
+            //这里只会打印出信号B的数据
+            NSLog(@"%@",x);
+
+        }];
+
+#### 信号的组合
+
+- 将信号A和信号B组合为一个信号,当其中一个信号发送数据时,组合信号也可以订阅到.
+
+        RACSignal * nameSignal = [self.tf_name rac_textSignal];
+
+        RACSignal * ageSignal = [self.tf_age rac_textSignal];
+
+        //将两个信号组成为一个信号,若其中一个子信号发送了对象,那么组合信号也能够订阅到
+        RACSignal * mergeSignal = [nameSignal merge:ageSignal];
+
+        [mergeSignal subscribeNext:^(id x) {
+
+            NSLog(@"%@",x);
+
+        }];
+
+#### 信号的压缩,须成对
+
+- 信号A和信号B会压缩成为一个信号,当信号A和信号B发出的信号成对存在时这个压缩后的元祖才会触发压缩流的next事件,注意要'成对',不成对的话其中一个信号发送多次也不会被订阅到
+
+        //信号A和B会压缩成为一个信号,当二者'同时'发送数据时,并且把两个信号的内容合并成一个元组，才会触发压缩流的next事件
+        //注意这里的'同时'二字指的并不是时间上的同时,只要信号A发送,信号B也发送就可以了,并不需要同时,但一定要成对
+        RACSignal * zipSignal1 = [self.signalA zipWith:self.signalB];
+
+        [zipSignal1 subscribeNext:^(id x) {
+
+            NSLog(@"%@",x);
+    
+        }];
+
+        RACSignal * nameSignal = [self.tf_name rac_textSignal];
+
+        RACSignal * ageSignal = [self.tf_age rac_textSignal];
+
+        RACSignal * zipSignal2 = [nameSignal zipWith:ageSignal];
+
+        //这里会把姓名和年龄输入框的信号包装成一个元祖,这里看起来效果会比较明显,年龄和姓名输入框若多次变动后,他们的信号呈现一个多一个少的情况下那么是无法订阅成功的
+        //必须信号称对包装成元祖才可以
+        [zipSignal2 subscribeNext:^(id x) {
+
+            NSLog(@"%@",x);
+
+        }];
+
+#### 信号的压缩,每个信号只要sendNext即可
+
+- 和zip相似,只要两个信号都发送过至少一次信号就会执行,不同的是zip要求更为苛刻,需要二者信号每次执行时都必须成对,否则无法订阅成功
+
+        RACSignal * nameSignal = [self.tf_name rac_textSignal];
+
+        RACSignal * ageSignal = [self.tf_age rac_textSignal];
+
+        //和zip相似,只要两个信号都发送过至少一次信号就会执行,不同的是zip要求更为苛刻,需要二者信号每次执行时都必须成对,否则无法订阅成功
+        RACSignal * combineSignal = [nameSignal combineLatestWith:ageSignal];
+
+        [combineSignal subscribeNext:^(id x) {
+
+            NSLog(@"%@",x);
+
+        }];
+
+#### 信号的聚合
+
+- 先组合再聚合,聚合后和映射类似可以返回我们需要的数据格式
+
+        RACSignal * nameSignal = [self.tf_name rac_textSignal];
+
+        RACSignal * ageSignal = [self.tf_age rac_textSignal];
+
+        //先组合再聚合
+        //reduce后的参数需要自己添加,添加以前方传来的信号的数据为准
+        //return类似映射,可以对数据进行处理再发送给订阅者
+        RACSignal * reduceSignal = [RACSignal combineLatest:@[nameSignal,ageSignal] reduce:^id(NSString * name,NSString * age){
+
+            return [NSString stringWithFormat:@"姓名:%@,年龄:%@",name,age];
+
+        }];
+
+        [reduceSignal subscribeNext:^(id x) {
+
+            NSLog(@"%@",x);
+        }];
 - 未完待
 
 
