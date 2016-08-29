@@ -26,7 +26,9 @@
 
 @implementation SignalCombinerVC
 
+#pragma mark - 生命周期 -
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
@@ -35,8 +37,22 @@
     [self createSignal];
     
     [self testTheMethodOfConcat];
+    
+//    [self testTheMethodOfThen];
+    
+//    [self testTheMethodOfMerge];
+    
+//    [self testTheMethodOfZipWith];
+    
+//    [self testTheMethodOfCombineLatest];
+    
+//    [self testOfTheMethodOfReduce];
 }
 
+-(void)dealloc{
+    
+    NSLog(@"销毁");
+}
 #pragma mark - 创建信号 -
 -(void)createSignal{
     
@@ -69,6 +85,8 @@
 }
 
 #pragma mark - 信号组合处理 -
+
+//信号的依赖
 -(void)testTheMethodOfConcat{
     
     //这相当于网络请求中的依赖,必须先执行完信号A才会执行信号B
@@ -81,6 +99,108 @@
         
         NSLog(@"%@",x);
     }];
+}
+
+//信号的条件执行
+-(void)testTheMethodOfThen{
+    
+    //当地一个信号执行完才会执行then后面的信号,同时第一个信号发送出来的东西不会被订阅到
+    @weakify(self);
+    [[self.signalA then:^RACSignal *{
+        
+        @strongify(self);
+        return self.signalB;
+        
+    }] subscribeNext:^(id x) {
+        
+        NSLog(@"%@",x);
+        
+    }];
+    
+}
+
+//信号的组合
+-(void)testTheMethodOfMerge{
+    
+    RACSignal * nameSignal = [self.tf_name rac_textSignal];
+    
+    RACSignal * ageSignal = [self.tf_age rac_textSignal];
+    
+    //将两个信号组成为一个信号,若其中一个子信号发送了对象,那么组合信号也能够订阅到
+    RACSignal * mergeSignal = [nameSignal merge:ageSignal];
+    
+    [mergeSignal subscribeNext:^(id x) {
+        
+        NSLog(@"%@",x);
+        
+    }];
+    
+}
+
+//信号的压缩(须成对)
+-(void)testTheMethodOfZipWith{
+    
+    //信号A和B会压缩成为一个信号,当二者'同时'发送数据时,并且把两个信号的内容合并成一个元组，才会触发压缩流的next事件
+    //注意这里的'同时'二字指的并不是时间上的同时,只要信号A发送,信号B也发送就可以了,并不需要同时,但一定要成对
+    RACSignal * zipSignal1 = [self.signalA zipWith:self.signalB];
+    
+    [zipSignal1 subscribeNext:^(id x) {
+        
+        NSLog(@"%@",x);
+        
+    }];
+    
+    RACSignal * nameSignal = [self.tf_name rac_textSignal];
+    
+    RACSignal * ageSignal = [self.tf_age rac_textSignal];
+    
+    RACSignal * zipSignal2 = [nameSignal zipWith:ageSignal];
+    
+    //这里会把姓名和年龄输入框的信号包装成一个元祖,这里看起来效果会比较明显,年龄和姓名输入框若多次变动后,他们的信号呈现一个多一个少的情况下那么是无法订阅成功的
+    //必须信号称对包装成元祖才可以
+    [zipSignal2 subscribeNext:^(id x) {
+        
+        NSLog(@"%@",x);
+    }];
+    
+}
+
+//信号的压缩,每个信号只要sendNext即可
+-(void)testTheMethodOfCombineLatest{
+   
+    RACSignal * nameSignal = [self.tf_name rac_textSignal];
+    
+    RACSignal * ageSignal = [self.tf_age rac_textSignal];
+    
+    //和zip相似,只要两个信号都发送过至少一次信号就会执行,不同的是zip要求更为苛刻,需要二者信号每次执行时都必须成对,否则无法订阅成功
+    RACSignal * combineSignal = [nameSignal combineLatestWith:ageSignal];
+    
+    [combineSignal subscribeNext:^(id x) {
+        
+        NSLog(@"%@",x);
+    }];
+}
+
+//信号的聚合
+-(void)testOfTheMethodOfReduce{
+    
+    RACSignal * nameSignal = [self.tf_name rac_textSignal];
+    
+    RACSignal * ageSignal = [self.tf_age rac_textSignal];
+    
+    //先组合再聚合
+    //reduce后的参数需要自己添加,添加以前方传来的信号的数据为准
+    //return类似映射,可以对数据进行处理再发送给订阅者
+    RACSignal * reduceSignal = [RACSignal combineLatest:@[nameSignal,ageSignal] reduce:^id(NSString * name,NSString * age){
+        
+        return [NSString stringWithFormat:@"姓名:%@,年龄:%@",name,age];
+    }];
+    
+    [reduceSignal subscribeNext:^(id x) {
+        
+        NSLog(@"%@",x);
+    }];
+    
 }
 
 #pragma mark - UI -

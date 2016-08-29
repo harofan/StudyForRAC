@@ -24,6 +24,8 @@
 
 @implementation MapVC
 
+#pragma mark - 生命周期 -
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
@@ -36,6 +38,11 @@
     //测试FlatternMap
     [self testTheMethodOfFlatternMap];
     
+}
+
+-(void)dealloc{
+    
+    NSLog(@"销毁");
 }
 
 #pragma mark - UI -
