@@ -1,0 +1,398 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		06F0E8F81D73D2360086F1DC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 06F0E8F71D73D2360086F1DC /* main.m */; };
+		06F0E8FB1D73D2360086F1DC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 06F0E8FA1D73D2360086F1DC /* AppDelegate.m */; };
+		06F0E9031D73D2360086F1DC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 06F0E9021D73D2360086F1DC /* Assets.xcassets */; };
+		06F0E9061D73D2360086F1DC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 06F0E9041D73D2360086F1DC /* LaunchScreen.storyboard */; };
+		06F0E9101D73D4430086F1DC /* MainVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 06F0E90F1D73D4430086F1DC /* MainVC.m */; };
+		06F0E9161D73D7150086F1DC /* MapVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 06F0E9141D73D7150086F1DC /* MapVC.m */; };
+		06F0E9171D73D7150086F1DC /* MapVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 06F0E9151D73D7150086F1DC /* MapVC.xib */; };
+		2707C99CC9C97882F888C8B0 /* Pods_Signal_processing.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57242142E1E58C71EF0AE164 /* Pods_Signal_processing.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		06F0E8F31D73D2360086F1DC /* Signal processing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Signal processing.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		06F0E8F71D73D2360086F1DC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		06F0E8F91D73D2360086F1DC /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		06F0E8FA1D73D2360086F1DC /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		06F0E9021D73D2360086F1DC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		06F0E9051D73D2360086F1DC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		06F0E9071D73D2370086F1DC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		06F0E90E1D73D43D0086F1DC /* MainVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainVC.h; sourceTree = "<group>"; };
+		06F0E90F1D73D4430086F1DC /* MainVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainVC.m; sourceTree = "<group>"; };
+		06F0E9111D73D4A00086F1DC /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		06F0E9131D73D7150086F1DC /* MapVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapVC.h; sourceTree = "<group>"; };
+		06F0E9141D73D7150086F1DC /* MapVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapVC.m; sourceTree = "<group>"; };
+		06F0E9151D73D7150086F1DC /* MapVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapVC.xib; sourceTree = "<group>"; };
+		1742872D3A826588BEAE4437 /* Pods-Signal processing.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Signal processing.release.xcconfig"; path = "Pods/Target Support Files/Pods-Signal processing/Pods-Signal processing.release.xcconfig"; sourceTree = "<group>"; };
+		57242142E1E58C71EF0AE164 /* Pods_Signal_processing.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Signal_processing.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A453FF2E888DBCDA748BBFB5 /* Pods-Signal processing.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Signal processing.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Signal processing/Pods-Signal processing.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		06F0E8F01D73D2360086F1DC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2707C99CC9C97882F888C8B0 /* Pods_Signal_processing.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		06F0E8EA1D73D2360086F1DC = {
+			isa = PBXGroup;
+			children = (
+				06F0E8F51D73D2360086F1DC /* Signal processing */,
+				06F0E8F41D73D2360086F1DC /* Products */,
+				A07CD835548382B87E712809 /* Pods */,
+				48CB53542402D0EA4F271C24 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		06F0E8F41D73D2360086F1DC /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				06F0E8F31D73D2360086F1DC /* Signal processing.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		06F0E8F51D73D2360086F1DC /* Signal processing */ = {
+			isa = PBXGroup;
+			children = (
+				06F0E9121D73D6F90086F1DC /* MapVC */,
+				06F0E90E1D73D43D0086F1DC /* MainVC.h */,
+				06F0E90F1D73D4430086F1DC /* MainVC.m */,
+				06F0E8F91D73D2360086F1DC /* AppDelegate.h */,
+				06F0E8FA1D73D2360086F1DC /* AppDelegate.m */,
+				06F0E9021D73D2360086F1DC /* Assets.xcassets */,
+				06F0E9041D73D2360086F1DC /* LaunchScreen.storyboard */,
+				06F0E9071D73D2370086F1DC /* Info.plist */,
+				06F0E8F61D73D2360086F1DC /* Supporting Files */,
+			);
+			path = "Signal processing";
+			sourceTree = "<group>";
+		};
+		06F0E8F61D73D2360086F1DC /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				06F0E9111D73D4A00086F1DC /* PrefixHeader.pch */,
+				06F0E8F71D73D2360086F1DC /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		06F0E9121D73D6F90086F1DC /* MapVC */ = {
+			isa = PBXGroup;
+			children = (
+				06F0E9131D73D7150086F1DC /* MapVC.h */,
+				06F0E9141D73D7150086F1DC /* MapVC.m */,
+				06F0E9151D73D7150086F1DC /* MapVC.xib */,
+			);
+			name = MapVC;
+			sourceTree = "<group>";
+		};
+		48CB53542402D0EA4F271C24 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				57242142E1E58C71EF0AE164 /* Pods_Signal_processing.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A07CD835548382B87E712809 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				A453FF2E888DBCDA748BBFB5 /* Pods-Signal processing.debug.xcconfig */,
+				1742872D3A826588BEAE4437 /* Pods-Signal processing.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		06F0E8F21D73D2360086F1DC /* Signal processing */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 06F0E90A1D73D2370086F1DC /* Build configuration list for PBXNativeTarget "Signal processing" */;
+			buildPhases = (
+				409837854841EABAB98FEB8F /* [CP] Check Pods Manifest.lock */,
+				06F0E8EF1D73D2360086F1DC /* Sources */,
+				06F0E8F01D73D2360086F1DC /* Frameworks */,
+				06F0E8F11D73D2360086F1DC /* Resources */,
+				3CE33232E0BCECEE36D44994 /* [CP] Embed Pods Frameworks */,
+				A1807E85866D95C779678875 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Signal processing";
+			productName = "Signal processing";
+			productReference = 06F0E8F31D73D2360086F1DC /* Signal processing.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		06F0E8EB1D73D2360086F1DC /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = LY;
+				TargetAttributes = {
+					06F0E8F21D73D2360086F1DC = {
+						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = PD5DSFUB55;
+					};
+				};
+			};
+			buildConfigurationList = 06F0E8EE1D73D2360086F1DC /* Build configuration list for PBXProject "Signal processing" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 06F0E8EA1D73D2360086F1DC;
+			productRefGroup = 06F0E8F41D73D2360086F1DC /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				06F0E8F21D73D2360086F1DC /* Signal processing */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		06F0E8F11D73D2360086F1DC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				06F0E9061D73D2360086F1DC /* LaunchScreen.storyboard in Resources */,
+				06F0E9171D73D7150086F1DC /* MapVC.xib in Resources */,
+				06F0E9031D73D2360086F1DC /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		3CE33232E0BCECEE36D44994 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Signal processing/Pods-Signal processing-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		409837854841EABAB98FEB8F /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		A1807E85866D95C779678875 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Signal processing/Pods-Signal processing-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		06F0E8EF1D73D2360086F1DC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				06F0E9101D73D4430086F1DC /* MainVC.m in Sources */,
+				06F0E9161D73D7150086F1DC /* MapVC.m in Sources */,
+				06F0E8FB1D73D2360086F1DC /* AppDelegate.m in Sources */,
+				06F0E8F81D73D2360086F1DC /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		06F0E9041D73D2360086F1DC /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				06F0E9051D73D2360086F1DC /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		06F0E9081D73D2370086F1DC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		06F0E9091D73D2370086F1DC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		06F0E90B1D73D2370086F1DC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A453FF2E888DBCDA748BBFB5 /* Pods-Signal processing.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/$(PRODUCT_NAME)/PrefixHeader.pch";
+				INFOPLIST_FILE = "Signal processing/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "LY.Signal-processing";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		06F0E90C1D73D2370086F1DC /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1742872D3A826588BEAE4437 /* Pods-Signal processing.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PREFIX_HEADER = "$(SRCROOT)/$(PRODUCT_NAME)/PrefixHeader.pch";
+				INFOPLIST_FILE = "Signal processing/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "LY.Signal-processing";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		06F0E8EE1D73D2360086F1DC /* Build configuration list for PBXProject "Signal processing" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				06F0E9081D73D2370086F1DC /* Debug */,
+				06F0E9091D73D2370086F1DC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		06F0E90A1D73D2370086F1DC /* Build configuration list for PBXNativeTarget "Signal processing" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				06F0E90B1D73D2370086F1DC /* Debug */,
+				06F0E90C1D73D2370086F1DC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 06F0E8EB1D73D2360086F1DC /* Project object */;
+}
