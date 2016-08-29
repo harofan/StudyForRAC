@@ -512,7 +512,7 @@ RACSubject作为代理有些局限性,代理方法不能有返回值
 
 ![image](https://github.com/SkyHarute/StudyForRAC/blob/master/imageFile/2.jpg)
 
-- 以textfiled成为第一响应者接收键盘弹出的同志为例,我们可以这么写通知
+- 以textfiled成为第一响应者接收键盘弹出的通知为例,我们可以这么写通知
 
         //代替通知
         //takeUntil会接收一个signal,当signal触发后会把之前的信号释放掉
@@ -573,6 +573,7 @@ RACSubject作为代理有些局限性,代理方法不能有返回值
             NSLog(@"%@",x);
 
         }];
+
 - 未完待
 
 
