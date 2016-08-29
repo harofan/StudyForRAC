@@ -113,6 +113,7 @@
         
     }] subscribeNext:^(id x) {
         
+        //这里只会打印出信号B的数据
         NSLog(@"%@",x);
         
     }];

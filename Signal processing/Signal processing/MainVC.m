@@ -12,6 +12,8 @@
 
 #import "SignalCombinerVC.h"
 
+#import "SignalProcessingVC.h"
+
 
 @interface MainVC ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -80,7 +82,7 @@
             break;
             
         case 2:
-            cell.textLabel.text = @"监听事件";
+            cell.textLabel.text = @"信号的筛选忽略过滤等操作";
             break;
             
         case 3:
@@ -124,14 +126,14 @@
             
             break;
         }
-//        case 2:
-//        {
-//            EventVC * vc = [[EventVC alloc]init];
-//            
-//            [self.navigationController pushViewController:vc animated:YES];
-//            
-//            break;
-//        }
+        case 2:
+        {
+            SignalProcessingVC * vc = [[SignalProcessingVC alloc]init];
+            
+            [self.navigationController pushViewController:vc animated:YES];
+            
+            break;
+        }
 //
 //        case 3:
 //        {
