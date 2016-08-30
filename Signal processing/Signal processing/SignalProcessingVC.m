@@ -18,6 +18,8 @@
 
 @property(nonatomic,strong)RACSignal * ageSignal;
 
+@property(nonatomic,strong)RACSignal * testSignal;
+
 @end
 
 @implementation SignalProcessingVC
@@ -35,12 +37,51 @@
     
 //    [self testOfTheMethodOfIgnore];
     
-    [self testTheMethodOfDistinctUntilChanged];
+//    [self testTheMethodOfDistinctUntilChanged];
+    
+//    [self testTheMethodOfTake];
+    
+//    [self testTheMethodOfTakeLast];
+    
+//    [self testTheMethodOfSkip];
+    
+    [self testTheMethodOfSwitcToLatest];
 }
 
 -(void)dealloc{
     
     NSLog(@"销毁");
+}
+
+#pragma mark - 即时搜索优化 -
+-(void)optimizeSearch{
+    
+    UITextField * tf_search = [[UITextField alloc]init];
+    
+    //这段代码的意思是若0.3秒内无新信号(tf无输入),并且输入框内不为空那么将会执行,这对服务器的压力减少有巨大帮助同时提高了用户体验
+    [[[[[[tf_search.rac_textSignal throttle:0.3]distinctUntilChanged]ignore:@""] map:^id(id value) {
+        
+        //这里使用的是信号中的信号这个概念
+        return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+            
+            //  network request
+            //  这里可将请求到的信息发送出去
+            [subscriber sendNext:value];
+            [subscriber sendCompleted];
+            
+            return [RACDisposable disposableWithBlock:^{
+                
+                //  cancel request
+                // 这里可以将取消请求写在这里,若输入框有新输入信息那么将会发送一个新的请求,原来那个没执行完的请求将会执行这个取消请求的代码
+                
+            }];
+        }];
+    }]switchToLatest] subscribeNext:^(id x) {
+        
+        //这里获取信息
+        
+    }];
+
 }
 
 #pragma mark - 测试方法 -
@@ -81,6 +122,87 @@
         
     }];
     
+    //从这里可以看出只有与上一个信号所传递的值不相同订阅者才会打印
+    [[self.testSignal distinctUntilChanged] subscribeNext:^(id x) {
+        
+        NSLog(@"%@",x);
+    }];
+}
+
+//获取前n个信号
+-(void)testTheMethodOfTake{
+    
+    [[self.testSignal take:3] subscribeNext:^(id x) {
+        
+        NSLog(@"%@",x);
+        
+    }];
+}
+
+//获取最后几次信号
+-(void)testTheMethodOfTakeLast{
+    
+    [[self.testSignal takeLast:3] subscribeNext:^(id x) {
+        
+        NSLog(@"%@",x);
+        
+    }];
+    
+}
+
+//对信号的监听条件释放
+-(void)testTheMethodOfTakeUntil{
+ 
+    //当对象被销毁后将不再监听
+    //这里takeuntil后面的参数可以自己创建信号
+    [[self.nameSignal takeUntil:self.rac_willDeallocSignal] subscribeNext:^(id x) {
+        
+        NSLog(@"%@",x);
+        
+    }];
+}
+
+//跳过几个信号不接收
+-(void)testTheMethodOfSkip{
+    
+    [[self.testSignal skip:5] subscribeNext:^(id x) {
+        
+        NSLog(@"%@",x);
+        
+    }];
+}
+
+//获取信号中信号的最新(最后一个)信号
+-(void)testTheMethodOfSwitcToLatest{
+    
+    RACSignal * signalOfSignal = [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+        
+        [subscriber sendNext:self.testSignal];
+        
+        [subscriber sendCompleted];
+        
+        return [RACDisposable disposableWithBlock:^{
+            
+        }];
+    }];
+    
+    [[signalOfSignal switchToLatest] subscribeNext:^(id x) {
+        
+        NSLog(@"%@",x);
+    }];
+}
+
+#pragma mark - 创建信号 -
+-(void)createupSignal{
+    
+    RACSignal * nameSignal = [self.tf_name rac_textSignal];
+    
+    RACSignal * ageSignal = [self.tf_age rac_textSignal];
+    
+    self.nameSignal = nameSignal;
+    
+    self.ageSignal = ageSignal;
+    
     RACSignal * signal = [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
         
         [subscriber sendNext:@1];
@@ -100,23 +222,7 @@
         }];
     }];
     
-    //从这里可以看出只有与上一个信号所传递的值不相同订阅者才会打印
-    [[signal distinctUntilChanged] subscribeNext:^(id x) {
-        
-        NSLog(@"%@",x);
-    }];
-}
-
-#pragma mark - 创建信号 -
--(void)createupSignal{
-    
-    RACSignal * nameSignal = [self.tf_name rac_textSignal];
-    
-    RACSignal * ageSignal = [self.tf_age rac_textSignal];
-    
-    self.nameSignal = nameSignal;
-    
-    self.ageSignal = ageSignal;
+    self.testSignal = signal;
     
 }
 
@@ -162,48 +268,6 @@
         make.width.equalTo(200);
         
     }];
-    
-//    UIButton * sendA = [[UIButton alloc]init];
-//    
-//    [self.view addSubview:sendA];
-//    
-//    [sendA setTitle:@"向name输入栏发送A" forState:UIControlStateNormal];
-//    
-//    [sendA setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-//    
-//    [sendA mas_makeConstraints:^(MASConstraintMaker *make) {
-//        
-//        make.centerX.equalTo(self.view.centerX).offset(0);
-//        
-//        make.top.equalTo(tf_age.bottom).offset(50);
-//        
-//    }];
-//    
-//    [[sendA rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
-//        
-//        self.tf_name.text = @"A";
-//    }];
-//    
-//    UIButton * sendB = [[UIButton alloc]init];
-//    
-//    [sendB setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-//    
-//    [self.view addSubview:sendB];
-//    
-//    [sendB setTitle:@"向name输入栏发送B" forState:UIControlStateNormal];
-//    
-//    [sendB mas_makeConstraints:^(MASConstraintMaker *make) {
-//        
-//        make.centerX.equalTo(self.view.centerX).offset(0);
-//        
-//        make.top.equalTo(sendA.bottom).offset(20);
-//        
-//    }];
-//    
-//    [[sendB rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
-//        
-//        self.tf_name.text = @"B";
-//    }];
     
 }
 
