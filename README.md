@@ -697,6 +697,217 @@ RACSubject作为代理有些局限性,代理方法不能有返回值
 
             NSLog(@"%@",x);
         }];
+
+### 信号的信息处理(过滤,忽略等)
+
+#### 即时搜索的优化
+
+- 如果我是刚学iOS不久的菜鸟我会怎么去写一个即时搜索呢?我大概会这么写,监听testfiled的内容变化,一旦变化就发送一个请求.这种做法写起来很好写但考虑过对网络和服务器压力减小的优化吗?答案很明显没有,下面用几行代码我们来看看RAC是怎样优化即时搜索的.
+
+        UITextField * tf_search = [[UITextField alloc]init];
+
+        //这段代码的意思是若0.3秒内无新信号(tf无输入),并且输入框内不为空那么将会执行,这对服务器的压力减少有巨大帮助同时提高了用户体验
+        [[[[[[tf_search.rac_textSignal throttle:0.3]distinctUntilChanged]ignore:@""] map:^id(id value) {
+
+        //这里使用的是信号中的信号这个概念
+            return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+
+                //  network request
+
+                //  这里可将请求到的信息发送出去
+
+                [subscriber sendNext:value];
+
+                [subscriber sendCompleted];
+
+                return [RACDisposable disposableWithBlock:^{
+
+                    //  cancel request
+
+                    // 这里可以将取消请求写在这里,若输入框有新输入信息那么将会发送一个新的请求,原来那个没执行完的请求将会执行这个取消请求的代码
+
+                        }];
+                    }];
+
+                }]switchToLatest] subscribeNext:^(id x) {
+
+                    //这里获取信息
+
+                }];
+
+- 从上面的代码可以看出我对即时搜索的信号进行了很多优化,包括判断用户输入时不进行搜索,为空不进行搜索,并对新请求发出对旧请求进行了处理.里头使用到了许多未知的方法,下面我们就对他们进行介绍
+
+#### 过滤
+
+- 对信号发送的信息进行过滤,只有符合我们要求的信号才会被订阅到
+
+        //对value进行过滤,若value的值满足条件订阅者才能够订阅到
+        [[self.nameSignal filter:^BOOL(NSString * value) {
+
+            return value.length>3;
+
+        }] subscribeNext:^(id x) {
+
+            NSLog(@"%@",x);
+
+        }];
+
+#### 忽略
+
+- 对信号发送的信息对某些值进行忽略,当值是忽略值时,订阅信号不会执行,一般用作判断非空
+
+        //当信号传输的数据时ignore后的参数时,订阅者就会忽略这个信号,ignore可以嵌套,一般用来判断非空
+        [[[self.nameSignal ignore:@"A"] ignore:@"B"] subscribeNext:^(id x) {
+
+            NSLog(@"%@",x);
+
+        }];
+
+#### 数据不同才会被订阅到
+
+- 输入不同的字符才会获取到数值,可以用在对服务器的请求上过滤一些相同的请求,降低服务器压力
+
+        -(void)testTheMethodOfDistinctUntilChanged{
+
+            //演示效果可能不太好,我重新写一组信号
+            [[self.nameSignal distinctUntilChanged] subscribeNext:^(id x) {
+
+                NSLog(@"%@",x);
+
+            }];
+
+            //从这里可以看出只有与上一个信号所传递的值不相同订阅者才会打印
+            [[self.testSignal distinctUntilChanged] subscribeNext:^(id x) {
+
+                NSLog(@"%@",x);
+
+            }];
+        }
+
+        -(void)createupSignal{
+
+            RACSignal * signal = [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+
+                [subscriber sendNext:@1];
+                [subscriber sendNext:@1];
+                [subscriber sendNext:@2];
+                [subscriber sendNext:@1];
+                [subscriber sendNext:@1];
+                [subscriber sendNext:@3];
+                [subscriber sendNext:@1];
+                [subscriber sendNext:@1];
+                [subscriber sendNext:@1];
+
+                [subscriber sendCompleted];
+
+                return [RACDisposable disposableWithBlock:^{
+
+                }];
+
+            }];
+
+            self.testSignal = signal;
+        }
+
+#### 获取前n个信号
+
+- 信号使用上面的示例
+
+        [[self.testSignal take:3] subscribeNext:^(id x) {
+
+            NSLog(@"%@",x);
+
+        }];
+
+#### 获取最后几次信号
+
+- 信号使用上面的示例
+
+        [[self.testSignal takeLast:3] subscribeNext:^(id x) {
+
+            NSLog(@"%@",x);
+
+        }];
+
+#### 对信号监听条件的释放
+
+- 前面介绍rac替代通知时有遇到过
+
+        //当对象被销毁后将不再监听
+        //这里takeuntil后面的参数可以自己创建信号
+        [[self.nameSignal takeUntil:self.rac_willDeallocSignal] subscribeNext:^(id x) {
+
+            NSLog(@"%@",x);
+
+        }];
+
+#### 跳过几个信号不接收
+
+- 信号使用上面的示例
+
+        [[self.testSignal skip:5] subscribeNext:^(id x) {
+
+            NSLog(@"%@",x);
+
+        }];
+
+#### 获取信号中带有数据的最新信号
+
+- 信号中信号很常用
+
+        RACSignal * signalOfSignal = [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+
+            [subscriber sendNext:self.testSignal];
+
+            [subscriber sendCompleted];
+
+            return [RACDisposable disposableWithBlock:^{
+
+            }];
+
+        }];
+
+        [[signalOfSignal switchToLatest] subscribeNext:^(id x) {
+
+            NSLog(@"%@",x);
+
+        }];
+
+#### 映射
+
+- 我们有时需要对信号block返回来的数据进行处理,或者是转换格式,或者是拼接字符串,这个时候就要用到map和flattenMap了,二者的区别主要在于:FlatternMap返回的是一个信号,而map返回的是信号,一般情况下我们使用的是map,只有信号中的信号我们才会使用FlatternMap.使用FlatternMap我们需要导入RACReturnSignal.h
+
+* map
+
+        //这里可以使用绑定写法来更快捷的达到目的,这里主要是为了体验map所以就不展示了,详情请看RACSignal的绑定
+        //这里的映射(map)前面有讲过主要是为了对block的返回值进行处理
+        @weakify(self);
+        [[[self.tf_name rac_textSignal] map:^id(id value) {
+
+            return [NSString stringWithFormat:@"名字是:%@",value];
+
+        }] subscribeNext:^(id x) {
+
+            @strongify(self);
+            self.lb_name.text = x;
+
+        }];
+
+* FlatternMap
+
+        //同时使用FlatternMap我们需要导入RACReturnSignal.h
+        @weakify(self);
+        [[[self.tf_age rac_textSignal] flattenMap:^RACStream *(id value) {
+
+            return [RACReturnSignal return:[NSString stringWithFormat:@"年龄是:%@",value]];
+
+        }] subscribeNext:^(id x) {
+
+            @strongify(self);
+            self.lb_age.text = x;
+
+        }];
+
 - 未完待
 
 
