@@ -37,7 +37,6 @@
     
     //测试FlatternMap
     [self testTheMethodOfFlatternMap];
-    
 }
 
 -(void)dealloc{
@@ -159,5 +158,6 @@
    }];
     
 }
+
 
 @end

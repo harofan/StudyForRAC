@@ -14,6 +14,8 @@
 
 #import "SignalProcessingVC.h"
 
+#import "HandSignalsVC.h"
+
 
 @interface MainVC ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -86,7 +88,7 @@
             break;
             
         case 3:
-            cell.textLabel.text = @"代替通知";
+            cell.textLabel.text = @"对信号的操作";
             break;
             
         case 4:
@@ -134,15 +136,15 @@
             
             break;
         }
-//
-//        case 3:
-//        {
-//            NSNotificationVC * vc = [[NSNotificationVC alloc]init];
-//            
-//            [self.navigationController pushViewController:vc animated:YES];
-//            
-//            break;
-//        }
+
+        case 3:
+        {
+            HandSignalsVC * vc = [[HandSignalsVC alloc]init];
+            
+            [self.navigationController pushViewController:vc animated:YES];
+            
+            break;
+        }
 //
 //        case 4:
 //        {
