@@ -921,7 +921,7 @@ RACSubject作为代理有些局限性,代理方法不能有返回值
 
 以前我对冷信号和热信号的认知就是没订阅的就是冷信号,订阅了的就是热信号,但是最近研究副作用时看了几篇文章打破了我以前的观点.例如RACSignal一般创建出来就是冷信号,RACSubject,RACComand内部返回的信号, RACMulticastConnect这些就是热信号,区别就好比冷信号是一段视频,发过来可以完整的接收到,而热信号就好比是直播,你在订阅的时候有可能信息错过了的话就会收不到.
 
-实际上冷热信号的区分并不是这样的,热信号指，即使外部没有订阅，里面已经源源不断发送值了;冷信号因为每次订阅都会执行一次，每个订阅都是独立行为。这和我们是否去订阅他并没有什么直接的关系,在RAC2中 RACSignal是信号，RACSubject是热信号，RACSignal和子类排除RACSubject是冷信号,而在RAC4中signal是热信号 SignalProducer是冷信号.
+实际上冷热信号的区分并不是这样的,热信号指，即使外部没有订阅，里面已经源源不断发送值了,你在订阅的时候如果前面的信号错过了就错过了不会再有,这就是为何RACSubject为何要先订阅才能收到信号的原因;冷信号因为每次订阅都会执行一次，每个订阅都是独立行为。这和我们是否去订阅他并没有什么直接的关系,在RAC2中 RACSignal是信号，RACSubject是热信号，RACSignal和子类排除RACSubject是冷信号,而在RAC4中signal是热信号 SignalProducer是冷信号.
 
 我们一般使用热信号的时候会非常谨慎的使用,因为RACSubject会被滥用太方便了,我们一般会使用replay*的方法或者multicast、publish方法来转化或者创建热信号.
 
@@ -966,6 +966,8 @@ RACSubject即使有多少个订阅者，它都只会执行一次，并将结果�
 
         NSLog(@"Subject created.");
 
+        //RACMulticastConnection:用于当一个信号，被多次订阅时，为了保证创建信号时，避免多次调用创建信号中的block，造成副作用，可以使用这个类处理。
+        //也可以通过signal publish创建
         RACMulticastConnection *multicastConnection = [coldSignal multicast:subject];
 
         RACSignal *hotSignal = multicastConnection.signal;
