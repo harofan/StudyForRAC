@@ -199,6 +199,10 @@ block不能列入其中的原因很简单.block是提前准备好的代码,传�
 
 这里为了更好的体现出效果所以采用了textfield绑定到模型,模型绑定到label的做法,比较好理解,这样在textfiled输入文字便能够实时改变模型值,而模型值一旦改变,label的text内容也会随之改变.
 
+* 直接双向绑定
+
+        RACChannelTo(self.lb_name,text) = RACChannelTo(model, name);
+
 * UI绑定模型
 
         PersonModel * model = [[PersonModel alloc]init];
@@ -344,6 +348,7 @@ RACSubject作为代理有些局限性,代理方法不能有返回值
 
             [self.delagetaSubject sendNext:@"haha"];
 
+            //若想要持续代理必须注释掉这一步
             [self.delagetaSubject sendCompleted];
         }
 
@@ -907,6 +912,15 @@ RACSubject作为代理有些局限性,代理方法不能有返回值
             self.lb_age.text = x;
 
         }];
+
+### 冷信号和热信号
+
+- 这里感谢cocoachina论坛Noah前辈对我的耐心讲解,同时本文参考了臧成威前辈的[文章](http://tech.meituan.com/talk-about-reactivecocoas-cold-signal-and-hot-signal-part-2.html)
+
+以前我对冷信号和热信号的认知就是没订阅的就是冷信号,订阅了的就是热信号,但是最近研究副作用时看了几篇文章打破了我以前的观点.例如RACSignal一般创建出来就是冷信号,RACSubject,RACComand内部返回的信号, RACMulticastConnect这些就是热信号,区别就好比冷信号是一段视频,发过来可以完整的接收到,而热信号就好比是直播,你在订阅的时候有可能信息错过了的话就会收不到.
+
+实际上冷热信号的区分并不是这样的,热信号指，即使外部没有订阅，里面已经源源不断发送值了;冷信号因为每次订阅都会执行一次，每个订阅都是独立行为。这和我们是否去订阅他并没有什么直接的关系,在RAC2中 RACSignal是信号，RACSubject是热信号，RACSignal和子类排除RACSubject是冷信号,而在RAC4中signal是热信号 SignalProducer是冷信号
+
 
 - 未完待
 
