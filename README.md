@@ -917,10 +917,138 @@ RACSubject作为代理有些局限性,代理方法不能有返回值
 
 - 这里感谢cocoachina论坛Noah前辈对我的耐心讲解,同时本文参考了臧成威前辈的[文章](http://tech.meituan.com/talk-about-reactivecocoas-cold-signal-and-hot-signal-part-2.html)
 
+#### 冷热信号的理解
+
 以前我对冷信号和热信号的认知就是没订阅的就是冷信号,订阅了的就是热信号,但是最近研究副作用时看了几篇文章打破了我以前的观点.例如RACSignal一般创建出来就是冷信号,RACSubject,RACComand内部返回的信号, RACMulticastConnect这些就是热信号,区别就好比冷信号是一段视频,发过来可以完整的接收到,而热信号就好比是直播,你在订阅的时候有可能信息错过了的话就会收不到.
 
-实际上冷热信号的区分并不是这样的,热信号指，即使外部没有订阅，里面已经源源不断发送值了;冷信号因为每次订阅都会执行一次，每个订阅都是独立行为。这和我们是否去订阅他并没有什么直接的关系,在RAC2中 RACSignal是信号，RACSubject是热信号，RACSignal和子类排除RACSubject是冷信号,而在RAC4中signal是热信号 SignalProducer是冷信号
+实际上冷热信号的区分并不是这样的,热信号指，即使外部没有订阅，里面已经源源不断发送值了;冷信号因为每次订阅都会执行一次，每个订阅都是独立行为。这和我们是否去订阅他并没有什么直接的关系,在RAC2中 RACSignal是信号，RACSubject是热信号，RACSignal和子类排除RACSubject是冷信号,而在RAC4中signal是热信号 SignalProducer是冷信号.
 
+我们一般使用热信号的时候会非常谨慎的使用,因为RACSubject会被滥用太方便了,我们一般会使用replay*的方法或者multicast、publish方法来转化或者创建热信号.
+
+RACSubject即使有多少个订阅者，它都只会执行一次，并将结果返回。另外RACMulticastConnection这种内部实现实际上是多个订阅者订阅了一个subject,控制执行行为并不是通过被订阅,而是手动控制的
+
+#### 对RAC副作用的个人理解
+
+副作用指的就是RAC改变了外界的状态(例如全局属性的赋值,多次网络请求,线程锁等),这些可能会导致一个问题,那就是同样的输入可能会导致不同的输出,同时也增加了我们排查代码错误的难度.以网络请求为例,现实中一般是不会这么用的,这里只是举个例子.请求若使用冷信号,我们对这个冷信号在进行一些操作的时候,臧成威前辈讲其实内部对一些信号的操作是再次订阅的过程,那么最后你可能会导致多次请求的问题出现,这便可以理解为副作用.严格地讲iOS开发其实就是一个在创造副作用的过程.现实中我们一般会把请求放到viewmodel中,只请求一个数据,然后将数据转成相应的属性暴露在.h文件,然后控制器在和数据进行绑定,这样做非常的优雅.
+
+#### 冷信号转热信号
+
+这是臧成威前辈给出的冷信号转热信号比较常用的方法,他比subject直接订阅冷信号的优点在于例如subject的订阅者提前终止了订阅，而subject并不能终止对coldSignal的订阅,具体实现代码如下:
+
+        RACSignal *coldSignal = [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+
+                NSLog(@"Cold signal be subscribed.");
+
+                [[RACScheduler mainThreadScheduler] afterDelay:1.5 schedule:^{
+
+                    [subscriber sendNext:@"A"];
+
+                }];
+
+                [[RACScheduler mainThreadScheduler] afterDelay:3 schedule:^{
+
+                    [subscriber sendNext:@"B"];
+
+                }];
+
+                [[RACScheduler mainThreadScheduler] afterDelay:5 schedule:^{
+
+                    [subscriber sendCompleted];
+
+                }];
+
+
+                return nil;
+
+            }];
+
+        RACSubject *subject = [RACSubject subject];
+
+        NSLog(@"Subject created.");
+
+        RACMulticastConnection *multicastConnection = [coldSignal multicast:subject];
+
+        RACSignal *hotSignal = multicastConnection.signal;
+
+        [[RACScheduler mainThreadScheduler] afterDelay:2 schedule:^{
+
+            [multicastConnection connect];
+
+        }];
+
+        [hotSignal subscribeNext:^(id x) {
+
+            NSLog(@"Subscribe 1 recieve value:%@.", x);
+
+        }];
+
+        [[RACScheduler mainThreadScheduler] afterDelay:4 schedule:^{
+
+            [hotSignal subscribeNext:^(id x) {
+
+                NSLog(@"Subscribe 2 recieve value:%@.", x);
+
+            }];
+
+        }];
+
+* 另一种写法
+
+        RACSignal *coldSignal = [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+
+            NSLog(@"Cold signal be subscribed.");
+
+            [[RACScheduler mainThreadScheduler] afterDelay:1.5 schedule:^{
+
+                [subscriber sendNext:@"A"];
+
+            }];
+
+            [[RACScheduler mainThreadScheduler] afterDelay:3 schedule:^{
+
+                [subscriber sendNext:@"B"];
+
+            }];
+
+            [[RACScheduler mainThreadScheduler] afterDelay:5 schedule:^{
+
+                [subscriber sendCompleted];
+
+            }];
+
+
+            return nil;
+
+        }];
+
+        RACSubject *subject = [RACSubject subject];
+
+        NSLog(@"Subject created.");
+
+        RACMulticastConnection *multicastConnection = [coldSignal multicast:subject];
+
+        RACSignal *hotSignal = multicastConnection.autoconnect;
+
+        [[RACScheduler mainThreadScheduler] afterDelay:2 schedule:^{
+
+            [hotSignal subscribeNext:^(id x) {
+
+                NSLog(@"Subscribe 1 recieve value:%@.", x);
+
+            }];
+
+        }];
+
+
+        [[RACScheduler mainThreadScheduler] afterDelay:4 schedule:^{
+
+            [hotSignal subscribeNext:^(id x) {
+
+                NSLog(@"Subscribe 2 recieve value:%@.", x);
+
+            }];
+
+        }];
 
 - 未完待
 
