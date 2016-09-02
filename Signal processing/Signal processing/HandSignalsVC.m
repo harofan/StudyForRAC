@@ -25,6 +25,10 @@
     
 //    [self testTheMethodOfDoNextandDoComplete];
     
+//    [self testTheMethodOfInterval];
+    
+    [self testTheMethodOfReplay];
+    
 
 }
 
@@ -83,6 +87,84 @@
         
     }];
 }
+
+//超时自动报错
+-(void)testTheMethodOfTmeout{
+    
+    [[self.testSignal timeout:1 onScheduler:[RACScheduler mainThreadScheduler]] subscribeNext:^(id x) {
+        
+        NSLog(@"%@",x);
+        
+    } error:^(NSError *error) {
+        
+        //超时一秒后会自动报错
+        NSLog(@"%@",error);
+        
+    }];
+}
+
+-(void)testTheMethodOfInterval{
+    
+    //每一秒执行一次,这里要加上释放信号,否则控制器推出后依旧会执行,看具体需求吧
+    [[[RACSignal interval:1 onScheduler:[RACScheduler scheduler]]takeUntil:self.rac_willDeallocSignal ] subscribeNext:^(id x) {
+      
+        NSLog(@"%@",[NSDate date]);
+        
+    }];
+    
+}
+
+//延时执行
+-(void)testTheMethodOfDelay{
+    
+    [[self.testSignal delay:2] subscribeNext:^(id x) {
+        
+        NSLog(@"%@",[NSDate date]);
+        
+    }];
+    
+}
+
+//若信号发送失败信息则会重新执行
+-(void)testTheMethodOfRetry{
+    
+    [[self.testSignal retry] subscribeNext:^(id x) {
+       
+        NSLog(@"%@",x);
+        
+    } error:^(NSError *error) {
+        
+        NSLog(@"%@",error);
+        
+    }];
+}
+
+-(void)testTheMethodOfReplay{
+    //当一个信号被多次订阅时,不会每次都执行一遍副作用,而是像热信号一样只执行一遍,replay内部将信号封装RACMulticastConnection的热信号
+    RACSignal *signal = [[RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+        
+        static int a = 1;
+        
+        [subscriber sendNext:@(a)];
+        
+        a ++;
+        
+        return nil;
+    }] replay];
+    
+    [signal subscribeNext:^(id x) {
+        
+        NSLog(@"第一个订阅者%@",x);
+        
+    }];
+    
+    [signal subscribeNext:^(id x) {
+        
+        NSLog(@"第二个订阅者%@",x);
+        
+    }];
+}
+
 
 
 

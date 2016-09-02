@@ -1115,6 +1115,142 @@ subscribeOn则会将传递内容和副作用一起放到指定线程执行
         2016-09-02 09:54:47.819 Signal processing[1778:54504] receiveSignal<NSThread: 0x7fde7adb4e00>{number = 2, name = (null)}
 
 
+### 对信号的一些执行操作
+
+#### send信号前执行相应的block
+
+        //doNext doComplete doError中的block会分别在对应的sendNext sendComplete sendError之前执行
+        [[[[self.testSignal doNext:^(id x) {
+
+            NSLog(@"sendNext之前会执行这个block");
+
+        }] doCompleted:^{
+
+            NSLog(@"sendComplete之前会执行这个block");
+
+        }] doError:^(NSError *error) {
+
+            NSLog(@"sendError之前会执行这个block");
+
+        }] subscribeNext:^(id x) {
+
+            NSLog(@"%@",x);
+
+        }];
+
+#### 超时自动报错
+
+        [[self.testSignal timeout:1 onScheduler:[RACScheduler mainThreadScheduler]] subscribeNext:^(id x) {
+
+            NSLog(@"%@",x);
+
+        } error:^(NSError *error) {
+
+            //超时一秒后会自动报错
+            NSLog(@"%@",error);
+
+        }];
+
+#### 定时执行
+
+和前面讲的定时器类似
+
+        //每一秒执行一次,这里要加上释放信号,否则控制器推出后依旧会执行,看具体需求吧
+        [[[RACSignal interval:1 onScheduler:[RACScheduler scheduler]]takeUntil:self.rac_willDeallocSignal ] subscribeNext:^(id x) {
+
+            NSLog(@"%@",[NSDate date]);
+
+        }];
+
+#### 延时执行
+
+        [[self.testSignal delay:2] subscribeNext:^(id x) {
+
+            NSLog(@"%@",[NSDate date]);
+
+        }];
+
+#### 信号发送失败后会重新执行
+
+        [[self.testSignal retry] subscribeNext:^(id x) {
+
+            NSLog(@"%@",x);
+
+        } error:^(NSError *error) {
+
+            NSLog(@"%@",error);
+
+        }];
+
+#### 当一个信号被多次订阅后会像热信号那样
+
+当一个信号被多次订阅时,不会每次都执行一遍副作用,而是像热信号一样只执行一遍,replay内部将信号封装RACMulticastConnection的热信号
+
+拿示例来说第一个例子我们不对信号进行replay操作
+
+        RACSignal *signal = [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+
+            static int a = 1;
+
+            [subscriber sendNext:@(a)];
+
+            a ++;
+
+            return nil;
+
+        }];
+
+        [signal subscribeNext:^(id x) {
+
+            NSLog(@"第一个订阅者%@",x);
+
+        }];
+
+        [signal subscribeNext:^(id x) {
+
+            NSLog(@"第二个订阅者%@",x);
+
+        }];
+
+- 输出结果如下
+
+        2016-09-02 11:57:50.312 Signal processing[3703:323215] 第一个订阅者1
+        2016-09-02 11:57:50.312 Signal processing[3703:323215] 第二个订阅者2
+
+这个结果说明了冷信号的本质以及副作用,每订阅一次冷信号,都会完整的执行一次副作用
+
+下来对冷信号进行replay操作
+
+        RACSignal *signal = [[RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+
+            static int a = 1;
+
+            [subscriber sendNext:@(a)];
+
+            a ++;
+
+            return nil;
+        }] replay];
+
+        [signal subscribeNext:^(id x) {
+
+            NSLog(@"第一个订阅者%@",x);
+
+        }];
+
+        [signal subscribeNext:^(id x) {
+
+            NSLog(@"第二个订阅者%@",x);
+
+        }];
+
+- 输出结果如下
+
+    2016-09-02 11:59:44.352 Signal processing[3782:328331] 第一个订阅者1
+    2016-09-02 11:59:44.352 Signal processing[3782:328331] 第二个订阅者1
+
+由此可以看出,实际上是将冷信号只发送了一次
+
 - 未完待
 
 
