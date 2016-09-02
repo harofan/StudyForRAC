@@ -25,7 +25,7 @@
     
 //    [self testTheMethodOfDoNextandDoComplete];
     
-    [self testTheMethodOf];
+
 }
 
 -(void)dealloc{
@@ -84,37 +84,6 @@
     }];
 }
 
--(void)testTheMethodOf{
-    
-//    [[[RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
-//        
-//        NSLog(@"send%@",[NSThread currentThread]);
-//        
-//        [subscriber sendNext:@1];
-//        
-//        return [RACDisposable disposableWithBlock:^{
-//            
-//        }];
-//    }] subscribeOn:[RACScheduler scheduler]] subscribeNext:^(id x) {
-//        
-//        NSLog(@"%@",[NSThread currentThread]);
-//    }];
-    
-//    [[self.testSignal deliverOn:[RACScheduler scheduler]] subscribeNext:^(id x) {
-//        
-//        NSLog(@"%@",[NSThread currentThread]);
-//        
-//    }];
-//    
-//    [[self.testSignal deliverOn:[RACScheduler mainThreadScheduler]] subscribeNext:^(id x) {
-//        
-//        NSLog(@"%@",[NSThread currentThread]);
-//    }];
-    
-    [[self.testSignal subscribeOn:[RACScheduler mainThreadScheduler]] subscribeNext:^(id x) {
-        
-        NSLog(@"3%@",[NSThread currentThread]);
-    }];
-}
+
 
 @end

@@ -23,7 +23,9 @@
     
     if (self.delagetaSubject) {
         [self.delagetaSubject sendNext:@"haha"];
-        [self.delagetaSubject sendCompleted];
+        
+        //若想要持续代理必须注释掉这一步
+//        [self.delagetaSubject sendCompleted];
     }
 }
 

@@ -16,6 +16,8 @@
 
 #import "HandSignalsVC.h"
 
+#import "SchedulerVC.h"
+
 
 @interface MainVC ()<UITableViewDelegate,UITableViewDataSource>
 
@@ -88,11 +90,11 @@
             break;
             
         case 3:
-            cell.textLabel.text = @"对信号的操作";
+            cell.textLabel.text = @"对信号的操作,信号发送前的一些1操作";
             break;
             
         case 4:
-            cell.textLabel.text = @"代替定时器";
+            cell.textLabel.text = @"调度器(多线程)";
             break;
             
         case 5:
@@ -145,16 +147,16 @@
             
             break;
         }
+
+        case 4:
+        {
+            SchedulerVC * vc = [[SchedulerVC alloc]init];
+            
+            [self.navigationController pushViewController:vc animated:YES];
+            
+            break;
+        }
 //
-//        case 4:
-//        {
-//            TimerVC * vc = [[TimerVC alloc]init];
-//            
-//            [self.navigationController pushViewController:vc animated:YES];
-//            
-//            break;
-//        }
-//            
 //        case 5:
 //        {
 //            TargetOfUISignalVC * vc = [[TargetOfUISignalVC alloc]init];

@@ -20,6 +20,7 @@
 		06F0E9251D7404A30086F1DC /* SignalCombinerVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 06F0E9231D7404A30086F1DC /* SignalCombinerVC.xib */; };
 		06F0E92A1D742BA10086F1DC /* SignalProcessingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 06F0E9281D742BA10086F1DC /* SignalProcessingVC.m */; };
 		06F0E92B1D742BA10086F1DC /* SignalProcessingVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 06F0E9291D742BA10086F1DC /* SignalProcessingVC.xib */; };
+		06FDB77A1D790DD5001E39EE /* SchedulerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 06FDB7791D790DD5001E39EE /* SchedulerVC.m */; };
 		2707C99CC9C97882F888C8B0 /* Pods_Signal_processing.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57242142E1E58C71EF0AE164 /* Pods_Signal_processing.framework */; };
 /* End PBXBuildFile section */
 
@@ -46,6 +47,8 @@
 		06F0E9271D742BA10086F1DC /* SignalProcessingVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignalProcessingVC.h; sourceTree = "<group>"; };
 		06F0E9281D742BA10086F1DC /* SignalProcessingVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignalProcessingVC.m; sourceTree = "<group>"; };
 		06F0E9291D742BA10086F1DC /* SignalProcessingVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SignalProcessingVC.xib; sourceTree = "<group>"; };
+		06FDB7781D790DD5001E39EE /* SchedulerVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SchedulerVC.h; sourceTree = "<group>"; };
+		06FDB7791D790DD5001E39EE /* SchedulerVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SchedulerVC.m; sourceTree = "<group>"; };
 		1742872D3A826588BEAE4437 /* Pods-Signal processing.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Signal processing.release.xcconfig"; path = "Pods/Target Support Files/Pods-Signal processing/Pods-Signal processing.release.xcconfig"; sourceTree = "<group>"; };
 		57242142E1E58C71EF0AE164 /* Pods_Signal_processing.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Signal_processing.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A453FF2E888DBCDA748BBFB5 /* Pods-Signal processing.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Signal processing.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Signal processing/Pods-Signal processing.debug.xcconfig"; sourceTree = "<group>"; };
@@ -94,6 +97,7 @@
 		06F0E8F51D73D2360086F1DC /* Signal processing */ = {
 			isa = PBXGroup;
 			children = (
+				06FDB7771D790DB7001E39EE /* SchedulerVC */,
 				06DE4C711D755B6D000FB666 /* HandSignalsVC */,
 				06F0E9261D742B760086F1DC /* SignalProcessingVC */,
 				06F0E9201D7404640086F1DC /* SignalCombinerVC */,
@@ -147,6 +151,15 @@
 				06F0E9291D742BA10086F1DC /* SignalProcessingVC.xib */,
 			);
 			name = SignalProcessingVC;
+			sourceTree = "<group>";
+		};
+		06FDB7771D790DB7001E39EE /* SchedulerVC */ = {
+			isa = PBXGroup;
+			children = (
+				06FDB7781D790DD5001E39EE /* SchedulerVC.h */,
+				06FDB7791D790DD5001E39EE /* SchedulerVC.m */,
+			);
+			name = SchedulerVC;
 			sourceTree = "<group>";
 		};
 		48CB53542402D0EA4F271C24 /* Frameworks */ = {
@@ -291,6 +304,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				06FDB77A1D790DD5001E39EE /* SchedulerVC.m in Sources */,
 				06F0E9241D7404A30086F1DC /* SignalCombinerVC.m in Sources */,
 				06F0E92A1D742BA10086F1DC /* SignalProcessingVC.m in Sources */,
 				06DE4C751D755B98000FB666 /* HandSignalsVC.m in Sources */,

@@ -149,6 +149,9 @@
         model.age = [x.second intValue];
     }];
     
+    //直接双向绑定
+//    RACChannelTo(self.lb_name,text) = RACChannelTo(model, name);
+    
 }
 
 

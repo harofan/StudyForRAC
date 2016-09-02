@@ -1052,6 +1052,69 @@ RACSubject即使有多少个订阅者，它都只会执行一次，并将结果�
 
         }];
 
+### 信号的调度器RACScheduler(多线程)
+
+#### deliverOn
+
+在上一篇我们讲到过RAC的副作用,deliverOn这个方法会将内容传递切换到指定线程,而副作用依旧会在指定线程内执行
+
+        //创建信号
+        -(void)createUpSignals{
+
+        RACSignal * signal = [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+
+            NSLog(@"sendTestSignal%@",[NSThread currentThread]);
+
+            [subscriber sendNext:@1];
+
+            [subscriber sendCompleted];
+
+            return [RACDisposable disposableWithBlock:^{
+
+                    }];
+            }];
+
+        self.testSignal = signal;
+
+        }
+
+        //订阅信号
+        //要想放在主线程执行只要将[RACScheduler scheduler]更换为[RACScheduler mainThreadScheduler]
+        [[self.testSignal deliverOn:[RACScheduler scheduler]] subscribeNext:^(id x) {
+
+            NSLog(@"receiveSignal%@",[NSThread currentThread]);
+
+        }];
+
+- 打印结果如下
+
+        2016-09-02 09:48:59.697 Signal processing[1686:22894] sendTestSignal<NSThread: 0x7fb373c0bb80>{number = 1, name = main}
+        2016-09-02 09:48:59.697 Signal processing[1686:24680] receiveSignal<NSThread: 0x7fb373e07070>{number = 3, name = (null)}
+
+subscribeOn则会将传递内容和副作用一起放到指定线程执行
+
+        [[[RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+
+            NSLog(@"sendSignal%@",[NSThread currentThread]);
+
+            [subscriber sendNext:@1];
+
+            return [RACDisposable disposableWithBlock:^{
+    
+                    }];
+
+        }] subscribeOn:[RACScheduler scheduler]] subscribeNext:^(id x) {
+
+            NSLog(@"receiveSignal%@",[NSThread currentThread]);
+
+        }];
+
+- 打印结果如下
+
+        2016-09-02 09:54:47.819 Signal processing[1778:54504] sendSignal<NSThread: 0x7fde7adb4e00>{number = 2, name = (null)}
+        2016-09-02 09:54:47.819 Signal processing[1778:54504] receiveSignal<NSThread: 0x7fde7adb4e00>{number = 2, name = (null)}
+
+
 - 未完待
 
 
